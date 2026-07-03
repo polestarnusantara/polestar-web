@@ -46,6 +46,7 @@ const catalog: Product[] = [
     ],
     benefits: [],
     accent: "#16A34A",
+    logo: "/logos/starbot.png",
     tiers: [
       { id: 11, name: "Lisensi", price: 1500000, unit: "sekali bayar", note: null, highlight: true },
     ],
