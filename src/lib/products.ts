@@ -25,6 +25,7 @@ export type Product = {
   benefits: string[];
   accent: string; // warna aksen kartu (hex)
   logo?: string; // path logo di /public (mis. "/logos/nama.png"); opsional
+  logoBg?: "light" | "dark"; // latar tile logo. Default "dark" (untuk logo berteks putih).
   tiers: Tier[];
 };
 
@@ -125,6 +126,7 @@ const catalog: Product[] = [
     benefits: [],
     accent: "#1E3A8A",
     logo: "/logos/finsfree.png",
+    logoBg: "light",
     tiers: [
       { id: 41, name: "Basic", price: 1500000, unit: "/bln", note: null, highlight: false },
       { id: 42, name: "Premium", price: 3000000, unit: "/bln", note: null, highlight: true },

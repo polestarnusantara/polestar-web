@@ -21,19 +21,33 @@ function IconAI({ className }: { className?: string }) {
   );
 }
 
-type Props = { logo?: string; category: string; accent: string; name: string };
+type Props = {
+  logo?: string;
+  category: string;
+  accent: string;
+  name: string;
+  logoBg?: "light" | "dark";
+};
 
 /**
- * Menampilkan logo produk pada tile GELAP (sesuai desain logo yang dibuat
- * untuk latar gelap → teks putih/emas tetap terbaca) dan berukuran besar.
+ * Menampilkan logo produk pada tile besar. Warna tile menyesuaikan desain logo:
+ *  - "dark" (default): logo berteks putih/emas → tile gradient gelap.
+ *  - "light": logo berteks gelap/abu-abu → tile putih.
  * Jika file logo gagal dimuat → fallback ke ikon kategori.
  */
-export default function ProductLogo({ logo, category, accent, name }: Props) {
+export default function ProductLogo({ logo, category, accent, name, logoBg }: Props) {
   const [failed, setFailed] = useState(false);
+
+  const tile =
+    logoBg === "light"
+      ? "border-line bg-white shadow-sm"
+      : "border-white/10 bg-gradient-to-br from-brand-deep to-ink shadow-md";
 
   if (logo && !failed) {
     return (
-      <span className="inline-flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-brand-deep to-ink shadow-md">
+      <span
+        className={`inline-flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border ${tile}`}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={logo}

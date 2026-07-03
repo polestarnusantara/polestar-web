@@ -29,6 +29,7 @@ function ProductCard({ product }: { product: Product }) {
               category={product.category}
               accent={product.accent}
               name={product.name}
+              logoBg={product.logoBg}
             />
             <div className="flex items-center gap-2 font-mono text-xs text-faint uppercase tracking-wider">
               <span>{product.category}</span>
