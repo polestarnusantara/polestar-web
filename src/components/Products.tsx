@@ -1,24 +1,6 @@
 import type { Product } from "@/lib/products";
 import { rupiah, site } from "@/lib/site";
-
-function IconEA({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
-      <rect x="5" y="7" width="14" height="12" rx="2" />
-      <path strokeLinecap="round" d="M9 3v4M15 3v4M9 19v2M15 19v2M2 11h3M2 15h3M19 11h3M19 15h3" />
-      <circle cx="10" cy="13" r="1" fill="currentColor" stroke="none" />
-      <circle cx="14" cy="13" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function IconAI({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={1.8} aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M3 12h3l2.5-6 5 16 2.5-10H21" />
-    </svg>
-  );
-}
+import ProductLogo from "./ProductLogo";
 
 function Check({ className }: { className?: string }) {
   return (
@@ -37,22 +19,17 @@ function ExternalLink({ className }: { className?: string }) {
 }
 
 function ProductCard({ product }: { product: Product }) {
-  const tint = product.accent + "1A";
   return (
     <article className="reveal rounded-2xl glass overflow-hidden">
       <div className="grid lg:grid-cols-12">
         <div className="lg:col-span-7 p-7 sm:p-9 border-b lg:border-b-0 lg:border-r border-line">
           <div className="flex items-center gap-3">
-            <span
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg"
-              style={{ backgroundColor: tint, color: product.accent }}
-            >
-              {product.category === "AI Signal" ? (
-                <IconAI className="h-5 w-5" />
-              ) : (
-                <IconEA className="h-5 w-5" />
-              )}
-            </span>
+            <ProductLogo
+              logo={product.logo}
+              category={product.category}
+              accent={product.accent}
+              name={product.name}
+            />
             <div className="flex items-center gap-2 font-mono text-xs text-faint uppercase tracking-wider">
               <span>{product.category}</span>
               <span className="text-silver">/</span>

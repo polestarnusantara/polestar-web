@@ -24,6 +24,7 @@ export type Product = {
   highlights: string[];
   benefits: string[];
   accent: string; // warna aksen kartu (hex)
+  logo?: string; // path logo di /public (mis. "/logos/nama.png"); opsional
   tiers: Tier[];
 };
 
@@ -66,6 +67,7 @@ const catalog: Product[] = [
     ],
     benefits: [],
     accent: "#CA8A04",
+    logo: "/logos/gold-mind-ai.png",
     tiers: [
       { id: 21, name: "Basic", price: 1500000, unit: "/bln", note: null, highlight: false },
       { id: 22, name: "Premium", price: 3000000, unit: "/bln", note: null, highlight: true },
@@ -97,6 +99,7 @@ const catalog: Product[] = [
       "Sewa Full EA",
     ],
     accent: "#6366F1",
+    logo: "/logos/tradingmatic-bot.png",
     tiers: [
       { id: 31, name: "Starter", price: 500000, unit: "sekali bayar", note: "Balance $100 – $999", highlight: false },
       { id: 32, name: "Basic", price: 1000000, unit: "sekali bayar", note: "Balance $1.000", highlight: true },
@@ -120,6 +123,7 @@ const catalog: Product[] = [
     ],
     benefits: [],
     accent: "#1E3A8A",
+    logo: "/logos/finsfree.png",
     tiers: [
       { id: 41, name: "Basic", price: 1500000, unit: "/bln", note: null, highlight: false },
       { id: 42, name: "Premium", price: 3000000, unit: "/bln", note: null, highlight: true },
@@ -142,6 +146,7 @@ const catalog: Product[] = [
     ],
     benefits: [],
     accent: "#3B82F6",
+    logo: "/logos/quadran-ea.png",
     tiers: [
       { id: 51, name: "Basic", price: 1000000, unit: "sekali bayar", note: "lot 0,01 – 0,1", highlight: false },
       { id: 52, name: "Pro", price: 3000000, unit: "sekali bayar", note: "lot 0,01 – 1", highlight: true },
