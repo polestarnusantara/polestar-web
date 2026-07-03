@@ -9,8 +9,6 @@ import Logo, { LogoDefs } from "@/components/Logo";
 import { getProducts } from "@/lib/products";
 import { site } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
-
 const MARKET = [
   { label: "EMAS · XAUUSD", symbol: "OANDA:XAUUSD" },
   { label: "MINYAK · WTI", symbol: "TVC:USOIL" },

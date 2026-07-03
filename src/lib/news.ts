@@ -1,21 +1,21 @@
 // Berita pasar otomatis dari feed RSS (gratis, tanpa API key).
-// Sumber: FXStreet (Forex & Commodities). Di-cache di memori 30 menit.
+// Sumber: FXStreet (Forex & Commodities).
+// Di-cache lewat ISR Next.js (revalidate 15 mnt) → cepat & andal di Vercel,
+// auto-refresh berkala tanpa menarik feed tiap request.
 
 export type NewsItem = {
   title: string;
   link: string;
   description: string;
-  date: string; // ISO / pubDate mentah
+  date: string; // pubDate mentah
   source: string;
 };
 
 const FEED_URL = "https://www.fxstreet.com/rss/news";
 const SOURCE = "FXStreet";
-const TTL_MS = 30 * 60 * 1000; // 30 menit
+const REVALIDATE_S = 900; // 15 menit
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121 Safari/537.36";
-
-let cache: { at: number; items: NewsItem[] } = { at: 0, items: [] };
 
 function decode(s: string): string {
   return s
@@ -36,18 +36,13 @@ function tag(block: string, name: string): string {
 }
 
 export async function getMarketNews(limit = 4): Promise<NewsItem[]> {
-  const now = Date.now();
-  if (cache.items.length && now - cache.at < TTL_MS) {
-    return cache.items.slice(0, limit);
-  }
-
   try {
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 6000);
+    const timeout = setTimeout(() => controller.abort(), 8000);
     const res = await fetch(FEED_URL, {
       signal: controller.signal,
       headers: { "User-Agent": UA, Accept: "application/rss+xml, application/xml, text/xml" },
-      cache: "no-store",
+      next: { revalidate: REVALIDATE_S },
     });
     clearTimeout(timeout);
     if (!res.ok) throw new Error(`RSS status ${res.status}`);
@@ -70,11 +65,10 @@ export async function getMarketNews(limit = 4): Promise<NewsItem[]> {
       });
     }
 
-    if (items.length) cache = { at: now, items };
-    return (items.length ? items : cache.items).slice(0, limit);
+    return items.slice(0, limit);
   } catch {
-    // Gagal fetch → pakai cache terakhir (bisa kosong saat pertama kali).
-    return cache.items.slice(0, limit);
+    // Gagal fetch (timeout/blokir) → kembalikan kosong; kartu CTA tetap tampil.
+    return [];
   }
 }
 
