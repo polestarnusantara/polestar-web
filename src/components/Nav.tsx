@@ -27,20 +27,20 @@ export default function Nav() {
     <header className="sticky top-0 z-50 pt-3 px-3 sm:px-5">
       <nav
         className={`mx-auto max-w-[1400px] rounded-2xl glass-nav px-4 sm:px-6 transition-shadow duration-300 ${
-          scrolled ? "shadow-[0_14px_40px_rgba(2,6,23,0.14)]" : ""
+          scrolled ? "shadow-[0_14px_40px_rgba(0,0,0,0.4)]" : ""
         }`}
       >
         <div className="flex items-center justify-between h-14 sm:h-16">
           <a href="#hero" className="flex items-center gap-2.5" aria-label="Polestar Indonesia — beranda">
-            <Logo className="h-7 w-7 shrink-0" />
-            <span className="font-display text-[1.05rem] font-semibold tracking-tight">
-              Polestar <span className="text-brand">Indonesia</span>
+            <Logo className="h-8 w-8 shrink-0" />
+            <span className="font-display text-[1.05rem] font-semibold tracking-tight text-ink">
+              Polestar <span className="gradient-text">Indonesia</span>
             </span>
           </a>
 
           <div className="hidden lg:flex items-center gap-9 text-[0.95rem] font-medium text-steel">
             {LINKS.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-ink transition-colors">
+              <a key={l.href} href={l.href} className="hover:text-brand-light transition-colors duration-200">
                 {l.label}
               </a>
             ))}
@@ -51,7 +51,7 @@ export default function Nav() {
               href={site.telegram}
               target="_blank"
               rel="noopener"
-              className="hidden sm:inline-flex items-center gap-2 rounded-md bg-ink px-4 py-2.5 text-sm font-semibold text-white hover:bg-brand transition-colors duration-200 cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-2.5 text-sm font-semibold text-white hover:shadow-[0_0_20px_rgba(74,171,184,0.3)] transition-all duration-300 cursor-pointer"
             >
               Gabung Telegram
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
@@ -60,7 +60,7 @@ export default function Nav() {
             </a>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-md border border-line text-ink cursor-pointer hover:bg-mist transition-colors"
+              className="lg:hidden inline-flex h-11 w-11 items-center justify-center rounded-lg border border-line text-ink cursor-pointer hover:bg-mist transition-colors"
               aria-label="Buka menu"
               aria-expanded={open}
             >
@@ -79,7 +79,7 @@ export default function Nav() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-4 py-3 hover:bg-mist transition-colors"
+                  className="block rounded-lg px-4 py-3 hover:bg-white/5 transition-colors"
                 >
                   {l.label}
                 </a>
@@ -89,7 +89,7 @@ export default function Nav() {
                 target="_blank"
                 rel="noopener"
                 onClick={() => setOpen(false)}
-                className="mt-1 flex items-center justify-center gap-2 rounded-lg bg-ink px-4 py-3 font-semibold text-white"
+                className="mt-1 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-3 font-semibold text-white"
               >
                 Gabung Telegram Gratis
               </a>

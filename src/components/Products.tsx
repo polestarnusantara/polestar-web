@@ -20,7 +20,7 @@ function ExternalLink({ className }: { className?: string }) {
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="reveal rounded-2xl glass overflow-hidden">
+    <article className="reveal rounded-2xl glass gradient-border overflow-hidden">
       <div className="grid lg:grid-cols-12">
         <div className="lg:col-span-7 p-7 sm:p-9 border-b lg:border-b-0 lg:border-r border-line">
           <div className="flex items-center gap-3">
@@ -38,11 +38,11 @@ function ProductCard({ product }: { product: Product }) {
             </div>
           </div>
 
-          <h3 className="mt-4 font-display text-2xl font-bold tracking-tight">{product.name}</h3>
-          <p className="mt-1 text-sm font-medium text-brand">{product.tagline}</p>
+          <h3 className="mt-4 font-display text-2xl font-bold tracking-tight text-ink">{product.name}</h3>
+          <p className="mt-1 text-sm font-medium text-brand-light">{product.tagline}</p>
           <p className="mt-3 text-sm leading-relaxed text-steel">{product.description}</p>
 
-          <ul className="mt-5 grid sm:grid-cols-2 gap-2.5 text-sm">
+          <ul className="mt-5 grid sm:grid-cols-2 gap-2.5 text-sm text-ink">
             {product.highlights.map((h) => (
               <li key={h} className="flex items-start gap-2">
                 <Check className="h-4 w-4 mt-0.5 flex-none text-brand" />
@@ -54,7 +54,7 @@ function ProductCard({ product }: { product: Product }) {
           {product.benefits.length > 0 && (
             <div className="mt-6 border-t border-line pt-5">
               <p className="label text-faint">Benefit</p>
-              <ul className="mt-3 grid sm:grid-cols-2 gap-2.5 text-sm">
+              <ul className="mt-3 grid sm:grid-cols-2 gap-2.5 text-sm text-ink">
                 {product.benefits.map((b) => (
                   <li key={b} className="flex items-start gap-2">
                     <Check className="h-4 w-4 mt-0.5 flex-none text-brand" />
@@ -66,21 +66,21 @@ function ProductCard({ product }: { product: Product }) {
           )}
         </div>
 
-        <div className="lg:col-span-5 p-7 sm:p-9 bg-white/25">
+        <div className="lg:col-span-5 p-7 sm:p-9 bg-white/[0.02]">
           <p className="label text-faint">Paket Harga</p>
           <div className="mt-4 space-y-2.5">
             {product.tiers.map((t) => (
               <div
                 key={t.id}
                 className={`flex items-center justify-between gap-3 rounded-lg border px-4 py-3 ${
-                  t.highlight ? "border-brand bg-brand-tint" : "border-white/60 bg-white/55"
+                  t.highlight ? "border-brand/40 bg-brand-tint" : "border-line bg-white/[0.03]"
                 }`}
               >
                 <div>
-                  <p className="flex items-center gap-2 text-sm font-semibold">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-ink">
                     {t.name}
                     {t.highlight && (
-                      <span className="rounded bg-brand px-1.5 py-0.5 text-[10px] font-bold text-white">
+                      <span className="rounded bg-gradient-to-r from-brand to-brand-dark px-1.5 py-0.5 text-[10px] font-bold text-white">
                         POPULER
                       </span>
                     )}
@@ -88,7 +88,7 @@ function ProductCard({ product }: { product: Product }) {
                   {t.note && <p className="mt-0.5 text-xs text-faint">{t.note}</p>}
                 </div>
                 <div className="text-right">
-                  <p className="font-mono text-sm font-semibold">
+                  <p className="font-mono text-sm font-semibold text-ink">
                     {rupiah(t.price)}
                     {t.unit === "/bln" && <span className="text-faint">/bln</span>}
                   </p>
@@ -99,7 +99,7 @@ function ProductCard({ product }: { product: Product }) {
                     href={site.sas}
                     target="_blank"
                     rel="noopener"
-                    className="text-xs font-semibold text-brand hover:underline"
+                    className="text-xs font-semibold text-brand-light hover:underline"
                   >
                     Order →
                   </a>
@@ -112,7 +112,7 @@ function ProductCard({ product }: { product: Product }) {
             href={site.sas}
             target="_blank"
             rel="noopener"
-            className="mt-5 flex items-center justify-center gap-2 rounded-md bg-brand px-4 py-3.5 text-sm font-semibold text-white hover:bg-brand-dark transition-colors"
+            className="mt-5 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-3.5 text-sm font-semibold text-white hover:shadow-[0_0_24px_rgba(74,171,184,0.3)] transition-all duration-300"
           >
             Click to Order
             <ExternalLink className="h-4 w-4" />
@@ -127,8 +127,8 @@ export default function Products({ products }: { products: Product[] }) {
   return (
     <section id="produk" className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
       <div className="reveal">
-        <p className="label text-brand">01 — Produk &amp; Layanan</p>
-        <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02]">
+        <p className="label text-brand-light">01 — Produk &amp; Layanan</p>
+        <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">
           Bot trading &amp; AI signal kami
         </h2>
         <p className="mt-4 max-w-2xl text-steel">

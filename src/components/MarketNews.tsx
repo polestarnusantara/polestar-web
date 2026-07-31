@@ -39,7 +39,7 @@ function Arrow({ className }: { className?: string }) {
 }
 
 export default function MarketNews() {
-  const [items, setItems] = useState<Item[] | null>(null); // null = loading
+  const [items, setItems] = useState<Item[] | null>(null);
 
   useEffect(() => {
     let alive = true;
@@ -76,24 +76,24 @@ export default function MarketNews() {
       {items === null &&
         [0, 1, 2, 3].map((i) => (
           <div key={i} className="rounded-xl glass p-6 animate-pulse">
-            <div className="h-3 w-24 rounded bg-line" />
-            <div className="mt-4 h-4 w-full rounded bg-line" />
-            <div className="mt-2 h-4 w-3/4 rounded bg-line" />
-            <div className="mt-4 h-3 w-full rounded bg-line" />
-            <div className="mt-1.5 h-3 w-2/3 rounded bg-line" />
+            <div className="h-3 w-24 rounded bg-white/10" />
+            <div className="mt-4 h-4 w-full rounded bg-white/10" />
+            <div className="mt-2 h-4 w-3/4 rounded bg-white/10" />
+            <div className="mt-4 h-3 w-full rounded bg-white/10" />
+            <div className="mt-1.5 h-3 w-2/3 rounded bg-white/10" />
           </div>
         ))}
 
       {items?.map((n) => (
         <article
           key={n.link}
-          className="group rounded-xl glass p-6 hover:bg-white/75 transition-colors duration-200"
+          className="group rounded-xl glass p-6 hover:bg-white/[0.06] transition-colors duration-200"
         >
           <div className="flex items-center gap-2 font-mono text-xs">
-            <span className="rounded bg-brand-tint text-brand-dark px-1.5 py-0.5">FXStreet</span>
+            <span className="rounded bg-brand-tint text-brand-light px-1.5 py-0.5">FXStreet</span>
             <span className="text-faint">{formatDate(n.date)}</span>
           </div>
-          <h3 className="mt-4 font-display text-lg font-semibold tracking-tight leading-snug line-clamp-3">
+          <h3 className="mt-4 font-display text-lg font-semibold tracking-tight leading-snug line-clamp-3 text-ink">
             {n.title}
           </h3>
           {n.description && (
@@ -103,7 +103,7 @@ export default function MarketNews() {
             href={n.link}
             target="_blank"
             rel="noopener"
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand hover:gap-2.5 transition-all cursor-pointer"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-light hover:gap-2.5 transition-all cursor-pointer"
           >
             Baca selengkapnya <Arrow className="h-4 w-4" />
           </a>
@@ -111,15 +111,15 @@ export default function MarketNews() {
       ))}
 
       {/* Kartu CTA — selalu tampil, mengarahkan ke briefing komunitas */}
-      <article className="group rounded-xl bg-brand-deep text-white p-6 sm:col-span-2">
+      <article className="group rounded-xl bg-gradient-to-br from-brand-deep via-[#0f2a3d] to-[#0B1929] border border-brand/20 text-white p-6 sm:col-span-2">
         <div className="flex items-center gap-2 font-mono text-xs">
-          <span className="rounded bg-white/15 text-white px-1.5 py-0.5">POLESTAR</span>
-          <span className="text-white/60">SETIAP HARI</span>
+          <span className="rounded bg-white/10 text-white px-1.5 py-0.5">POLESTAR</span>
+          <span className="text-white/50">SETIAP HARI</span>
         </div>
         <h3 className="mt-4 font-display text-xl font-semibold tracking-tight leading-snug">
           Briefing &amp; analisa harian XAUUSD/WTI
         </h3>
-        <p className="mt-2.5 text-sm text-white/70 leading-relaxed">
+        <p className="mt-2.5 text-sm text-white/60 leading-relaxed">
           Berita di atas diperbarui otomatis. Untuk pembahasan lengkap, level penting, dan agenda
           ekonomi berdampak tinggi — ikuti sesi harian di grup Telegram kami.
         </p>
@@ -127,7 +127,7 @@ export default function MarketNews() {
           href={site.telegram}
           target="_blank"
           rel="noopener"
-          className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white hover:gap-2.5 transition-all cursor-pointer"
+          className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-light hover:gap-2.5 transition-all cursor-pointer"
         >
           Gabung Telegram <Arrow className="h-4 w-4" />
         </a>

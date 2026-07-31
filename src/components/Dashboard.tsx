@@ -18,14 +18,14 @@ export default function Dashboard() {
     symbol: active.symbol,
     interval: "60",
     timezone: "Asia/Jakarta",
-    theme: "light",
+    theme: "dark",
     style: "1",
     locale: "id",
     allow_symbol_change: true,
     calendar: false,
     hide_side_toolbar: false,
-    backgroundColor: "#FFFFFF",
-    gridColor: "rgba(15,23,42,0.06)",
+    backgroundColor: "rgba(0,0,0,0)",
+    gridColor: "rgba(148,163,184,0.06)",
     support_host: "https://www.tradingview.com",
   };
 
@@ -38,7 +38,7 @@ export default function Dashboard() {
     showIntervalTabs: true,
     displayMode: "single",
     locale: "id",
-    colorTheme: "light",
+    colorTheme: "dark",
   };
 
   return (
@@ -67,7 +67,7 @@ export default function Dashboard() {
           />
         </div>
         <div className="rounded-xl glass overflow-hidden">
-          <div className="px-5 py-3 border-b border-line text-sm font-semibold">
+          <div className="px-5 py-3 border-b border-line text-sm font-semibold text-ink">
             Ringkasan Teknikal
           </div>
           <TradingViewWidget

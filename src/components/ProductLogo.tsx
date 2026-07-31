@@ -40,8 +40,8 @@ export default function ProductLogo({ logo, category, accent, name, logoBg }: Pr
 
   const tile =
     logoBg === "light"
-      ? "border-line bg-white shadow-sm"
-      : "border-white/10 bg-gradient-to-br from-brand-deep to-ink shadow-md";
+      ? "border-line bg-white/5 shadow-sm"
+      : "border-white/10 bg-gradient-to-br from-brand-deep to-[#0a1525] shadow-md";
 
   if (logo && !failed) {
     return (
