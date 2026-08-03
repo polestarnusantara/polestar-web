@@ -57,10 +57,10 @@ function TierCard({
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`tier-spotlight relative flex items-center justify-between gap-3 rounded-lg border px-4 py-3 overflow-hidden cursor-pointer transition-all duration-200 ${
+      className={`tier-spotlight relative flex items-center justify-between gap-3 rounded-lg border px-4 py-3.5 overflow-hidden cursor-pointer transition-all duration-200 ${
         tier.highlight
-          ? "border-brand/40 bg-brand-tint hover:border-brand/60"
-          : "border-line bg-white/[0.03] hover:border-brand/30"
+          ? "border-brand/50 bg-brand-tint hover:border-brand"
+          : "border-line bg-white/[0.03] hover:border-brand/50 hover:bg-white/[0.05]"
       }`}
       style={
         {
@@ -70,13 +70,21 @@ function TierCard({
         } as React.CSSProperties
       }
     >
-      {/* Spotlight glow layer */}
+      {/* Spotlight glow layer — follows cursor */}
       <div
         className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
         style={{
           opacity: "var(--spot-opacity)",
           background:
-            "radial-gradient(180px circle at var(--spot-x) var(--spot-y), rgba(74, 171, 184, 0.15), transparent 60%)",
+            "radial-gradient(200px circle at var(--spot-x) var(--spot-y), rgba(74, 171, 184, 0.35), rgba(74, 171, 184, 0.08) 50%, transparent 70%)",
+        }}
+      />
+      {/* Border glow effect */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 rounded-lg transition-opacity duration-300"
+        style={{
+          opacity: "var(--spot-opacity)",
+          boxShadow: "inset 0 0 20px rgba(74, 171, 184, 0.12), 0 0 15px rgba(74, 171, 184, 0.08)",
         }}
       />
 
