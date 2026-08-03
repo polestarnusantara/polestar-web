@@ -1,3 +1,6 @@
+"use client";
+
+import { useCallback, useRef } from "react";
 import type { Product } from "@/lib/products";
 import { rupiah, site } from "@/lib/site";
 import ProductLogo from "./ProductLogo";
@@ -15,6 +18,97 @@ function ExternalLink({ className }: { className?: string }) {
     <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d="M14 5h5v5M19 5l-8 8M18 14v4a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2h4" />
     </svg>
+  );
+}
+
+/**
+ * TierCard — setiap tier (Basic/Pro/Premium/VIP) punya efek spotlight
+ * yang mengikuti posisi cursor mouse saat hover.
+ */
+function TierCard({
+  tier,
+}: {
+  tier: Product["tiers"][number];
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const el = ref.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      el.style.setProperty("--spot-x", `${x}px`);
+      el.style.setProperty("--spot-y", `${y}px`);
+      el.style.setProperty("--spot-opacity", "1");
+    },
+    []
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.setProperty("--spot-opacity", "0");
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={`tier-spotlight relative flex items-center justify-between gap-3 rounded-lg border px-4 py-3 overflow-hidden cursor-pointer transition-all duration-200 ${
+        tier.highlight
+          ? "border-brand/40 bg-brand-tint hover:border-brand/60"
+          : "border-line bg-white/[0.03] hover:border-brand/30"
+      }`}
+      style={
+        {
+          "--spot-x": "0px",
+          "--spot-y": "0px",
+          "--spot-opacity": "0",
+        } as React.CSSProperties
+      }
+    >
+      {/* Spotlight glow layer */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
+        style={{
+          opacity: "var(--spot-opacity)",
+          background:
+            "radial-gradient(180px circle at var(--spot-x) var(--spot-y), rgba(74, 171, 184, 0.15), transparent 60%)",
+        }}
+      />
+
+      <div className="relative z-10">
+        <p className="flex items-center gap-2 text-sm font-semibold text-ink">
+          {tier.name}
+          {tier.highlight && (
+            <span className="rounded bg-gradient-to-r from-brand to-brand-dark px-1.5 py-0.5 text-[10px] font-bold text-white">
+              POPULER
+            </span>
+          )}
+        </p>
+        {tier.note && <p className="mt-0.5 text-xs text-faint">{tier.note}</p>}
+      </div>
+      <div className="relative z-10 text-right">
+        <p className="font-mono text-sm font-semibold text-ink">
+          {rupiah(tier.price)}
+          {tier.unit === "/bln" && <span className="text-faint">/bln</span>}
+        </p>
+        {tier.unit !== "/bln" && (
+          <p className="text-[10px] text-faint">{tier.unit}</p>
+        )}
+        <a
+          href={site.sas}
+          target="_blank"
+          rel="noopener"
+          className="text-xs font-semibold text-brand-light hover:underline"
+        >
+          Order →
+        </a>
+      </div>
+    </div>
   );
 }
 
@@ -70,41 +164,7 @@ function ProductCard({ product }: { product: Product }) {
           <p className="label text-faint">Paket Harga</p>
           <div className="mt-4 space-y-2.5">
             {product.tiers.map((t) => (
-              <div
-                key={t.id}
-                className={`flex items-center justify-between gap-3 rounded-lg border px-4 py-3 ${
-                  t.highlight ? "border-brand/40 bg-brand-tint" : "border-line bg-white/[0.03]"
-                }`}
-              >
-                <div>
-                  <p className="flex items-center gap-2 text-sm font-semibold text-ink">
-                    {t.name}
-                    {t.highlight && (
-                      <span className="rounded bg-gradient-to-r from-brand to-brand-dark px-1.5 py-0.5 text-[10px] font-bold text-white">
-                        POPULER
-                      </span>
-                    )}
-                  </p>
-                  {t.note && <p className="mt-0.5 text-xs text-faint">{t.note}</p>}
-                </div>
-                <div className="text-right">
-                  <p className="font-mono text-sm font-semibold text-ink">
-                    {rupiah(t.price)}
-                    {t.unit === "/bln" && <span className="text-faint">/bln</span>}
-                  </p>
-                  {t.unit !== "/bln" && (
-                    <p className="text-[10px] text-faint">{t.unit}</p>
-                  )}
-                  <a
-                    href={site.sas}
-                    target="_blank"
-                    rel="noopener"
-                    className="text-xs font-semibold text-brand-light hover:underline"
-                  >
-                    Order →
-                  </a>
-                </div>
-              </div>
+              <TierCard key={t.id} tier={t} />
             ))}
           </div>
 
