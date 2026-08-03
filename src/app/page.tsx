@@ -101,8 +101,7 @@ export default async function Home() {
           <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 pt-16 sm:pt-24 pb-12">
             <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
               <div className="lg:col-span-7">
-                {/* Logo badge */}
-                <div className="reveal flex items-center gap-3 mb-8">
+                <div className="reveal flex items-center gap-3 mb-6 sm:mb-8">
                   <Logo className="h-14 w-14 hero-logo-glow" />
                   <div>
                     <p className="font-display text-sm font-semibold tracking-wider text-brand-light uppercase">Polestar Indonesia</p>
@@ -134,7 +133,7 @@ export default async function Home() {
                 </div>
               </div>
 
-              <div className="reveal d2 lg:col-span-5 flex flex-col items-center gap-6">
+              <div className="reveal d2 lg:col-span-5 flex flex-col items-center gap-6 hidden sm:flex">
                 {/* Large hero logo */}
                 <div className="relative">
                   <div className="absolute inset-0 blur-[80px] bg-gradient-to-br from-brand/30 via-brand-light/20 to-brand-dark/30 rounded-full scale-150" />
@@ -174,7 +173,7 @@ export default async function Home() {
               </div>
             </div>
 
-            <dl className="reveal d4 mt-16 grid grid-cols-2 md:grid-cols-4 border-t border-line">
+            <dl className="reveal d4 mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 border-t border-line">
               <div className="border-b md:border-b-0 md:border-r border-line py-6 pr-6 stat-glow">
                 <dd className="font-display text-3xl sm:text-4xl font-bold tracking-tight gradient-text" data-count="12500" data-suffix="+">0</dd>
                 <dt className="mt-1.5 text-sm text-faint">Anggota komunitas</dt>

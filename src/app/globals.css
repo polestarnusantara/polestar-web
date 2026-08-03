@@ -94,6 +94,13 @@ body {
   50% { transform: translateY(-12px); }
 }
 
+/* Reduce hero logo glow on mobile to prevent performance issues */
+@media (max-width: 640px) {
+  .hero-logo-glow {
+    filter: drop-shadow(0 0 30px rgba(74, 171, 184, 0.25));
+  }
+}
+
 /* ── Ambient orb glow behind hero ── */
 .hero-orb {
   position: absolute;
@@ -102,6 +109,12 @@ body {
   opacity: 0.4;
   pointer-events: none;
   animation: orb-pulse 8s ease-in-out infinite alternate;
+}
+/* Hide orbs on very small screens to prevent overflow */
+@media (max-width: 480px) {
+  .hero-orb {
+    display: none;
+  }
 }
 @keyframes orb-pulse {
   0% { opacity: 0.3; transform: scale(1); }
