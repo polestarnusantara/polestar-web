@@ -3,6 +3,7 @@ import Dashboard from "@/components/Dashboard";
 import LiveSection from "@/components/LiveSection";
 import Products from "@/components/Products";
 import MarketNews from "@/components/MarketNews";
+import NewsTabs from "@/components/NewsTabs";
 import ScrollFx from "@/components/ScrollFx";
 import TradingViewWidget from "@/components/TradingViewWidget";
 import Logo, { LogoDefs } from "@/components/Logo";
@@ -249,28 +250,10 @@ export default async function Home() {
           <div className="reveal">
             <p className="label text-brand-light">03 — Update Harian</p>
             <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Berita &amp; analisa pasar</h2>
+            <p className="mt-4 max-w-2xl text-steel">Update terbaru dari channel Telegram Polestar Indonesia dan berita pasar global.</p>
           </div>
 
-          <div className="mt-12 grid lg:grid-cols-3 gap-6">
-            <MarketNews />
-
-            <div className="reveal d2 rounded-xl glass overflow-hidden">
-              <div className="px-5 py-4 border-b border-line text-sm font-semibold text-ink">Berita Pasar Global</div>
-              <TradingViewWidget
-                widget="timeline"
-                height={520}
-                config={{
-                  feedMode: "all_symbols",
-                  isTransparent: true,
-                  displayMode: "regular",
-                  width: "100%",
-                  height: "100%",
-                  colorTheme: "dark",
-                  locale: "id",
-                }}
-              />
-            </div>
-          </div>
+          <NewsTabs />
         </section>
 
         {/* ── 04 ANALISA ── */}
