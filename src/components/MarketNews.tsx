@@ -87,7 +87,7 @@ export default function MarketNews() {
       {items?.map((n) => (
         <article
           key={n.link}
-          className="group rounded-xl glass p-6 hover:bg-white/[0.06] transition-colors duration-200"
+          className="group rounded-xl glass p-6 card-float"
         >
           <div className="flex items-center gap-2 font-mono text-xs">
             <span className="rounded bg-brand-tint text-brand-light px-1.5 py-0.5">FXStreet</span>

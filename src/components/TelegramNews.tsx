@@ -180,7 +180,7 @@ export default function TelegramNews() {
         return (
           <article
             key={msg.id}
-            className="group rounded-xl glass p-5 hover:bg-white/[0.06] transition-colors duration-200 flex flex-col"
+            className="group rounded-xl glass p-5 card-float flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between gap-2">

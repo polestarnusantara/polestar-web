@@ -122,7 +122,7 @@ function TierCard({
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="reveal rounded-2xl glass gradient-border overflow-hidden">
+    <article className="reveal rounded-2xl glass gradient-border overflow-hidden card-float">
       <div className="grid lg:grid-cols-12">
         <div className="lg:col-span-7 p-7 sm:p-9 border-b lg:border-b-0 lg:border-r border-line">
           <div className="flex items-center gap-3">

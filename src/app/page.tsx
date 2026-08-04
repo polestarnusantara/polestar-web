@@ -223,7 +223,7 @@ export default async function Home() {
 
             <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {MARKET.map((m, i) => (
-                <div key={m.symbol} className={`reveal d${i + 1} glass gradient-border rounded-xl p-1.5`}>
+                <div key={m.symbol} className={`reveal d${i + 1} glass gradient-border rounded-xl p-1.5 card-float`}>
                   <div className="px-3 pt-2 font-mono text-xs text-faint">{m.label}</div>
                   <TradingViewWidget
                     widget="mini-symbol-overview"
@@ -321,7 +321,7 @@ export default async function Home() {
                 ["05", "Membaca AI Signal", "Memanfaatkan sinyal AI: entry, stop, dan target dengan manajemen risiko."],
                 ["06", "Komunitas & Mentoring", "Diskusi harian, review trade bersama, dan dukungan dari mentor."],
               ].map(([n, t, d], i) => (
-                <div key={n} className={`reveal d${(i % 3) + 1} glass gradient-border rounded-xl p-7 hover:bg-white/[0.06] transition-colors duration-200 group`}>
+                <div key={n} className={`reveal d${(i % 3) + 1} glass gradient-border rounded-xl p-7 card-float group`}>
                   <span className="font-mono text-sm text-brand/50">{n}</span>
                   <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-ink group-hover:text-brand-light transition-colors">{t}</h3>
                   <p className="mt-2 text-sm text-steel leading-relaxed">{d}</p>
@@ -343,7 +343,7 @@ export default async function Home() {
               ["Gold Mind AI sangat membantu. Sinyalnya jelas dan order ke MT5 lewat Telegram benar-benar praktis.", "Dewi W.", "DW", "Anggota sejak 2023"],
               ["Sesi live-nya daging semua. Bisa lihat langsung mentor menganalisa WTI dari awal sampai eksekusi.", "Bagus P.", "BP", "Anggota sejak 2025"],
             ].map(([quote, name, initials, since]) => (
-              <figure key={name} className="reveal rounded-xl glass gradient-border p-7 hover:bg-white/[0.06] transition-colors duration-200">
+              <figure key={name} className="reveal rounded-xl glass gradient-border p-7 card-float">
                 <div className="flex gap-0.5 text-brand-light" aria-label="5 dari 5 bintang">
                   {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4" />)}
                 </div>
