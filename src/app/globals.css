@@ -116,7 +116,21 @@ body {
   pointer-events: none;
 }
 
-/* ── Hero logo glow ── */
+/* ── Hero logo glow & 3D Animation ── */
+.hero-logo-max {
+  filter: drop-shadow(0 0 60px rgba(74, 171, 184, 0.5)) drop-shadow(0 0 120px rgba(42, 107, 130, 0.4));
+  animation: logo-spin-float 10s ease-in-out infinite;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+@keyframes logo-spin-float {
+  0% { transform: translateY(0) rotateY(0deg) scale(1); filter: drop-shadow(0 0 40px rgba(74, 171, 184, 0.4)); }
+  25% { transform: translateY(-15px) rotateY(15deg) scale(1.05); filter: drop-shadow(0 0 80px rgba(126, 212, 224, 0.6)); }
+  50% { transform: translateY(0) rotateY(0deg) scale(1); filter: drop-shadow(0 0 40px rgba(74, 171, 184, 0.4)); }
+  75% { transform: translateY(-15px) rotateY(-15deg) scale(1.05); filter: drop-shadow(0 0 80px rgba(126, 212, 224, 0.6)); }
+  100% { transform: translateY(0) rotateY(0deg) scale(1); filter: drop-shadow(0 0 40px rgba(74, 171, 184, 0.4)); }
+}
+
 .hero-logo-glow {
   filter: drop-shadow(0 0 60px rgba(74, 171, 184, 0.35)) drop-shadow(0 0 120px rgba(42, 107, 130, 0.2));
   animation: logo-float 6s ease-in-out infinite;
@@ -128,7 +142,7 @@ body {
 
 /* Reduce hero logo glow on mobile to prevent performance issues */
 @media (max-width: 640px) {
-  .hero-logo-glow {
+  .hero-logo-glow, .hero-logo-max {
     filter: drop-shadow(0 0 30px rgba(74, 171, 184, 0.25));
   }
 }

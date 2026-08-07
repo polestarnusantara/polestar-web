@@ -54,10 +54,16 @@ export default function Home() {
           <div className="hero-orb w-[400px] h-[400px] bottom-0 -right-20 bg-gradient-to-tl from-brand-light/10 to-transparent" />
 
           <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="reveal inline-flex items-center gap-3 mb-8 px-4 py-2 rounded-full border border-brand/20 bg-brand/5 backdrop-blur-md">
-                <Logo className="h-6 w-6 hero-logo-glow" />
-                <span className="font-display text-sm font-semibold tracking-wider text-brand-light uppercase">B2B Event Organizer</span>
+            <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
+              
+              {/* Maximized 3D Animated Logo */}
+              <div className="reveal mb-10 relative">
+                <div className="absolute inset-0 blur-[80px] bg-gradient-to-br from-brand/40 via-brand-light/30 to-brand-dark/40 rounded-full scale-150 animate-pulse" />
+                <Logo className="relative h-32 w-32 sm:h-40 sm:w-40 hero-logo-max" />
+              </div>
+
+              <div className="reveal inline-flex items-center gap-3 mb-8 px-5 py-2.5 rounded-full border border-brand/20 bg-brand/5 backdrop-blur-md">
+                <span className="font-display text-sm font-bold tracking-widest text-brand-light uppercase">B2B Event Organizer</span>
               </div>
 
               <h1 className="reveal d1 font-display font-bold tracking-[-0.04em] leading-[1.05] text-[clamp(2.5rem,6vw,5.5rem)]">
