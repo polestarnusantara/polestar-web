@@ -2,14 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
-import { site } from "@/lib/site";
+import { site, waContactLink } from "@/lib/site";
 
 const LINKS = [
-  { href: "#produk", label: "Produk" },
-  { href: "#pasar", label: "Pasar" },
-  { href: "#analisa", label: "Analisa" },
-  { href: "#live", label: "Live" },
-  { href: "#gabung", label: "Komunitas" },
+  { href: "#layanan", label: "Layanan" },
+  { href: "#portofolio", label: "Portofolio" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export default function Nav() {
@@ -48,14 +46,14 @@ export default function Nav() {
 
           <div className="flex items-center gap-2">
             <a
-              href={site.telegram}
+              href={waContactLink()}
               target="_blank"
               rel="noopener"
               className="hidden sm:inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-2.5 text-sm font-semibold text-white hover:shadow-[0_0_20px_rgba(74,171,184,0.3)] transition-all duration-300 cursor-pointer"
             >
-              Gabung Telegram
-              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+              Hubungi Kami
+              <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden="true">
+                <path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3s1 2.7 1.2 2.9c.1.2 2 3.1 5 4.3.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z" />
               </svg>
             </a>
             <button
@@ -85,13 +83,13 @@ export default function Nav() {
                 </a>
               ))}
               <a
-                href={site.telegram}
+                href={waContactLink()}
                 target="_blank"
                 rel="noopener"
                 onClick={() => setOpen(false)}
                 className="mt-1 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-3 font-semibold text-white"
               >
-                Gabung Telegram Gratis
+                Hubungi Kami via WA
               </a>
             </div>
           </div>

@@ -1,49 +1,31 @@
 import Nav from "@/components/Nav";
-import Dashboard from "@/components/Dashboard";
-import LiveSection from "@/components/LiveSection";
-import Products from "@/components/Products";
-import MarketNews from "@/components/MarketNews";
-import NewsTabs from "@/components/NewsTabs";
 import ScrollFx from "@/components/ScrollFx";
-import TradingViewWidget from "@/components/TradingViewWidget";
 import Logo, { LogoDefs } from "@/components/Logo";
-import { getProducts } from "@/lib/products";
-import { site } from "@/lib/site";
-
-const MARKET = [
-  { label: "EMAS · XAUUSD", symbol: "OANDA:XAUUSD" },
-  { label: "MINYAK · WTI", symbol: "TVC:USOIL" },
-  { label: "EUR / USD", symbol: "OANDA:EURUSD" },
-  { label: "BITCOIN · BTCUSD", symbol: "BINANCE:BTCUSDT" },
-];
+import { site, waContactLink } from "@/lib/site";
+import Image from "next/image";
 
 const MARQUEE = [
-  "Expert Advisor MT4 & MT5",
-  "AI Signal Real-time",
-  "Analisa Teknikal Harian",
-  "XAUUSD · WTI · Forex",
-  "Live Streaming Edukasi",
-  "Komunitas Telegram Aktif",
+  "B2B Event Organizer",
+  "Corporate Exhibitions",
+  "Brand Activations",
+  "Seminars & Workshops",
+  "Premium Experience",
+  "Professional Execution",
 ];
 
-function TelegramGlyph({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71l-4.14-3.05-1.99 1.93c-.23.23-.42.42-.83.42z" />
-    </svg>
-  );
-}
+const PORTFOLIO_IMAGES = [
+  "20260807-093604.jpg",
+  "20260807-093608.jpg",
+  "20260807-093611.jpg",
+  "20260807-093613.jpg",
+  "20260807-093615.png",
+  "20260807-093618.png"
+];
+
 function Arrow({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth={2} aria-hidden="true">
       <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-    </svg>
-  );
-}
-function Star({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
-      <path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" />
     </svg>
   );
 }
@@ -55,151 +37,73 @@ function Check({ className }: { className?: string }) {
   );
 }
 
-export default async function Home() {
-  const products = await getProducts();
-
+export default function Home() {
   return (
     <>
       <LogoDefs />
-
-      {/* Ticker tape */}
-      <div className="w-full border-b border-line bg-black/30 backdrop-blur-md">
-        <TradingViewWidget
-          widget="ticker-tape"
-          height={46}
-          config={{
-            symbols: [
-              { proName: "OANDA:XAUUSD", title: "Emas / XAUUSD" },
-              { proName: "TVC:USOIL", title: "Minyak WTI" },
-              { proName: "TVC:UKOIL", title: "Minyak Brent" },
-              { proName: "OANDA:EURUSD", title: "EUR/USD" },
-              { proName: "FX:USDJPY", title: "USD/JPY" },
-              { proName: "OANDA:USDIDR", title: "USD/IDR" },
-              { proName: "BINANCE:BTCUSDT", title: "Bitcoin" },
-            ],
-            showSymbolLogo: true,
-            isTransparent: true,
-            displayMode: "adaptive",
-            colorTheme: "dark",
-            locale: "id",
-          }}
-        />
-      </div>
-
       <Nav />
 
       <main>
         {/* ── HERO ── */}
-        <section id="hero" className="relative overflow-hidden">
+        <section id="hero" className="relative overflow-hidden pt-12 sm:pt-16 pb-20">
           {/* Grid background */}
-          <div className="absolute inset-0 grid-bg" />
+          <div className="absolute inset-0 grid-bg opacity-70" />
 
           {/* Ambient orbs */}
-          <div className="hero-orb w-[500px] h-[500px] -top-40 left-1/2 -translate-x-1/2 bg-gradient-to-br from-brand/30 to-brand-dark/20" />
-          <div className="hero-orb w-[300px] h-[300px] top-1/3 -right-20 bg-gradient-to-br from-brand-light/20 to-transparent" />
-          <div className="hero-orb w-[250px] h-[250px] bottom-0 left-10 bg-gradient-to-tr from-brand-dark/25 to-transparent" />
+          <div className="hero-orb w-[600px] h-[600px] -top-40 left-1/2 -translate-x-1/2 bg-gradient-to-br from-brand/20 to-brand-dark/10" />
+          <div className="hero-orb w-[400px] h-[400px] bottom-0 -right-20 bg-gradient-to-tl from-brand-light/10 to-transparent" />
 
-          <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 pt-16 sm:pt-24 pb-12">
-            <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-              <div className="lg:col-span-7">
-                <div className="reveal flex items-center gap-3 mb-6 sm:mb-8">
-                  <Logo className="h-14 w-14 hero-logo-glow" />
-                  <div>
-                    <p className="font-display text-sm font-semibold tracking-wider text-brand-light uppercase">Polestar Indonesia</p>
-                    <p className="text-xs text-faint">Trading Education & Technology</p>
-                  </div>
-                </div>
-
-                <p className="reveal label text-brand-light">Edukasi · Bot Trading · AI Signal</p>
-                <h1 className="reveal d1 mt-5 font-display font-bold tracking-[-0.04em] leading-[0.95] text-[clamp(2.6rem,7.5vw,5.75rem)]">
-                  Navigasi pasar
-                  <br />
-                  emas &amp; minyak
-                  <br />
-                  dengan <span className="gradient-text">presisi.</span>
-                </h1>
-                <p className="reveal d2 mt-7 max-w-xl text-lg leading-relaxed text-steel">
-                  Polestar Indonesia menghadirkan Expert Advisor, AI Signal, dan edukasi trading. Analisa teknikal harian{" "}
-                  <span className="font-mono text-brand-light">XAUUSD</span> &amp; <span className="font-mono text-brand-light">WTI</span>, plus komunitas aktif di Telegram.
-                </p>
-                <div className="reveal d3 mt-8 flex flex-col sm:flex-row gap-3">
-                  <a href="#produk" className="inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-6 py-3.5 font-semibold text-white hover:shadow-[0_0_30px_rgba(74,171,184,0.35)] transition-all duration-300 cursor-pointer">
-                    Lihat Produk &amp; Harga
-                    <Arrow className="h-4 w-4" />
-                  </a>
-                  <a href={site.telegram} target="_blank" rel="noopener" className="inline-flex items-center justify-center gap-2 rounded-lg border border-line px-6 py-3.5 font-semibold text-ink hover:bg-white/5 hover:border-brand/30 transition-all duration-300 cursor-pointer">
-                    <TelegramGlyph className="h-4 w-4 text-brand-light" />
-                    Gabung Telegram
-                  </a>
-                </div>
+          <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="reveal inline-flex items-center gap-3 mb-8 px-4 py-2 rounded-full border border-brand/20 bg-brand/5 backdrop-blur-md">
+                <Logo className="h-6 w-6 hero-logo-glow" />
+                <span className="font-display text-sm font-semibold tracking-wider text-brand-light uppercase">B2B Event Organizer</span>
               </div>
 
-              <div className="reveal d2 lg:col-span-5 flex flex-col items-center gap-6 hidden sm:flex">
-                {/* Large hero logo */}
-                <div className="relative">
-                  <div className="absolute inset-0 blur-[80px] bg-gradient-to-br from-brand/30 via-brand-light/20 to-brand-dark/30 rounded-full scale-150" />
-                  <Logo className="relative h-72 w-72 sm:h-96 sm:w-96 hero-logo-glow" />
-                </div>
-
-                {/* Chart card */}
-                <div className="w-full rounded-xl glass gradient-border overflow-hidden">
-                  <div className="flex items-center justify-between px-4 py-2.5 border-b border-line">
-                    <span className="font-mono text-xs text-faint">XAUUSD · 1H</span>
-                    <span className="flex items-center gap-1.5 font-mono text-xs text-steel">
-                      <span className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-up" /> LIVE
-                    </span>
-                  </div>
-                  <TradingViewWidget
-                    widget="advanced-chart"
-                    height={280}
-                    config={{
-                      autosize: true,
-                      symbol: "OANDA:XAUUSD",
-                      interval: "60",
-                      timezone: "Asia/Jakarta",
-                      theme: "dark",
-                      style: "1",
-                      locale: "id",
-                      hide_top_toolbar: true,
-                      hide_side_toolbar: true,
-                      allow_symbol_change: false,
-                      save_image: false,
-                      calendar: false,
-                      backgroundColor: "rgba(0,0,0,0)",
-                      gridColor: "rgba(148,163,184,0.06)",
-                      support_host: "https://www.tradingview.com",
-                    }}
-                  />
-                </div>
+              <h1 className="reveal d1 font-display font-bold tracking-[-0.04em] leading-[1.05] text-[clamp(2.5rem,6vw,5.5rem)]">
+                Menciptakan <span className="gradient-text">Pengalaman Event</span> Profesional yang Tak Terlupakan.
+              </h1>
+              <p className="reveal d2 mt-7 text-lg sm:text-xl leading-relaxed text-steel max-w-2xl mx-auto">
+                Polestar Indonesia adalah Event Organizer terpercaya untuk kebutuhan B2B, pameran, seminar, dan brand activation perusahaan Anda.
+              </p>
+              
+              <div className="reveal d3 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#portofolio" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-8 py-4 font-semibold text-white hover:shadow-[0_0_30px_rgba(74,171,184,0.35)] transition-all duration-300 cursor-pointer">
+                  Lihat Portofolio
+                  <Arrow className="h-4 w-4" />
+                </a>
+                <a href={waContactLink()} target="_blank" rel="noopener" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border border-line px-8 py-4 font-semibold text-ink hover:bg-white/5 hover:border-brand/30 transition-all duration-300 cursor-pointer">
+                  Konsultasi Gratis
+                </a>
               </div>
             </div>
-
-            <dl className="reveal d4 mt-12 sm:mt-16 grid grid-cols-2 md:grid-cols-4 border-t border-line">
-              <div className="border-b md:border-b-0 md:border-r border-line py-6 pr-6 stat-glow">
-                <dd className="font-display text-3xl sm:text-4xl font-bold tracking-tight gradient-text" data-count="12500" data-suffix="+">0</dd>
-                <dt className="mt-1.5 text-sm text-faint">Anggota komunitas</dt>
+            
+            <dl className="reveal d4 mt-20 grid grid-cols-2 md:grid-cols-4 border-t border-line max-w-4xl mx-auto">
+              <div className="border-b md:border-b-0 md:border-r border-line py-8 text-center stat-glow">
+                <dd className="font-display text-4xl font-bold tracking-tight gradient-text" data-count="50" data-suffix="+">0</dd>
+                <dt className="mt-2 text-sm text-faint">Event Sukses</dt>
               </div>
-              <div className="border-b md:border-b-0 md:border-r border-line py-6 md:px-6 stat-glow">
-                <dd className="font-display text-3xl sm:text-4xl font-bold tracking-tight gradient-text" data-count="5" data-suffix="">0</dd>
-                <dt className="mt-1.5 text-sm text-faint">Produk unggulan</dt>
+              <div className="border-b md:border-b-0 md:border-r border-line py-8 text-center stat-glow">
+                <dd className="font-display text-4xl font-bold tracking-tight gradient-text" data-count="10" data-suffix="+">0</dd>
+                <dt className="mt-2 text-sm text-faint">Klien Korporat</dt>
               </div>
-              <div className="border-b md:border-b-0 md:border-r border-line py-6 pr-6 md:px-6 stat-glow">
-                <dd className="font-display text-3xl sm:text-4xl font-bold tracking-tight gradient-text" data-count="1200" data-suffix="+">0</dd>
-                <dt className="mt-1.5 text-sm text-faint">Sesi edukasi</dt>
+              <div className="border-b md:border-b-0 md:border-r border-line py-8 text-center stat-glow">
+                <dd className="font-display text-4xl font-bold tracking-tight gradient-text" data-count="15" data-suffix="+">0</dd>
+                <dt className="mt-2 text-sm text-faint">Tim Profesional</dt>
               </div>
-              <div className="py-6 md:pl-6 stat-glow">
-                <dd className="font-display text-3xl sm:text-4xl font-bold tracking-tight gradient-text" data-count="5" data-suffix=" thn">0</dd>
-                <dt className="mt-1.5 text-sm text-faint">Pengalaman</dt>
+              <div className="py-8 text-center stat-glow">
+                <dd className="font-display text-4xl font-bold tracking-tight gradient-text" data-count="5" data-suffix=" thn">0</dd>
+                <dt className="mt-2 text-sm text-faint">Pengalaman</dt>
               </div>
             </dl>
           </div>
         </section>
 
         {/* Marquee */}
-        <div className="border-y border-line py-3.5 marquee shimmer-line">
-          <div className="marquee__track label text-faint">
+        <div className="border-y border-line py-4 marquee shimmer-line bg-black/20">
+          <div className="marquee__track font-display font-medium tracking-wide text-steel uppercase text-sm">
             {[...MARQUEE, ...MARQUEE].map((m, i) => (
-              <span key={i} className="flex items-center gap-10">
+              <span key={i} className="flex items-center gap-12">
                 {m}
                 <span className="text-brand/30">✦</span>
               </span>
@@ -207,223 +111,126 @@ export default async function Home() {
           </div>
         </div>
 
-        {/* ── 01 PRODUK ── */}
-        <Products products={products} />
-
-        {/* ── 02 PASAR ── */}
-        <section id="pasar" className="border-y border-line">
+        {/* ── LAYANAN ── */}
+        <section id="layanan" className="border-y border-line">
           <div className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
-            <div className="reveal flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="label text-brand-light">02 — Pasar Hari Ini</p>
-                <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Pantau pasar real-time</h2>
-              </div>
-              <p className="max-w-sm text-steel">Harga live untuk instrumen utama yang kami bahas setiap hari. Data oleh TradingView.</p>
+            <div className="reveal text-center max-w-3xl mx-auto">
+              <p className="label text-brand-light">01 — Layanan Kami</p>
+              <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Solusi Event End-to-End</h2>
+              <p className="mt-4 text-steel">Dari konsep hingga eksekusi, kami memastikan acara bisnis Anda berjalan lancar dan memberikan impresi terbaik.</p>
             </div>
-
-            <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {MARKET.map((m, i) => (
-                <div key={m.symbol} className={`reveal d${i + 1} glass gradient-border rounded-xl p-1.5 card-float`}>
-                  <div className="px-3 pt-2 font-mono text-xs text-faint">{m.label}</div>
-                  <TradingViewWidget
-                    widget="mini-symbol-overview"
-                    height={160}
-                    config={{
-                      symbol: m.symbol,
-                      width: "100%",
-                      height: "100%",
-                      locale: "id",
-                      dateRange: "1D",
-                      colorTheme: "dark",
-                      isTransparent: true,
-                      autosize: true,
-                    }}
-                  />
+            
+            <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                ["Corporate Events", "Perencanaan dan manajemen penuh untuk konferensi, seminar, dan rapat kerja tahunan perusahaan."],
+                ["Exhibitions", "Pembuatan booth pameran, manajemen logistik, dan pengelolaan audiens untuk event berskala besar."],
+                ["Brand Activations", "Strategi kreatif dan eksekusi lapangan untuk peluncuran produk dan aktivasi merek."],
+              ].map(([t, d], i) => (
+                <div key={t} className={`reveal d${i + 1} glass gradient-border rounded-xl p-8 card-float group`}>
+                  <div className="h-12 w-12 rounded-lg bg-brand/10 border border-brand/20 flex items-center justify-center mb-6">
+                    <Check className="h-6 w-6 text-brand-light" />
+                  </div>
+                  <h3 className="font-display text-xl font-semibold tracking-tight text-ink group-hover:text-brand-light transition-colors">{t}</h3>
+                  <p className="mt-3 text-steel leading-relaxed">{d}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── 03 BERITA ── */}
-        <section id="berita" className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
-          <div className="reveal">
-            <p className="label text-brand-light">03 — Update Harian</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Berita &amp; analisa pasar</h2>
-            <p className="mt-4 max-w-2xl text-steel">Update terbaru dari channel Telegram Polestar Indonesia dan berita pasar global.</p>
+        {/* ── PORTOFOLIO ── */}
+        <section id="portofolio" className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
+          <div className="reveal flex flex-wrap items-end justify-between gap-6 mb-12">
+            <div className="max-w-2xl">
+              <p className="label text-brand-light">02 — Aktivitas & Portofolio</p>
+              <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Galeri Event Terbaru</h2>
+              <p className="mt-4 text-steel">Momen-momen terbaik dari berbagai acara yang telah kami kelola dengan sukses, termasuk event SAS dan lainnya.</p>
+            </div>
+            <a href={waContactLink("Layanan EO")} className="inline-flex items-center gap-2 rounded-lg border border-brand/30 px-5 py-2.5 text-sm font-semibold text-brand-light hover:bg-brand/10 transition-colors">
+              Buat Event Anda
+              <Arrow className="h-4 w-4" />
+            </a>
           </div>
 
-          <NewsTabs />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {PORTFOLIO_IMAGES.map((img, i) => (
+              <div key={i} className={`reveal d${(i % 3) + 1} group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float`}>
+                <Image 
+                  src={`/portfolio/${img}`} 
+                  alt={`Dokumentasi Event Polestar ${i+1}`}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/90 via-[#0B1929]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                  <p className="text-white font-display font-semibold text-lg">Activity {i+1}</p>
+                  <p className="text-white/70 text-sm">Event Management</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </section>
 
-        {/* ── 04 ANALISA ── */}
-        <section id="analisa" className="border-y border-line">
+        {/* ── KLIEN / TESTIMONI ── */}
+        <section className="border-y border-line bg-white/[0.02]">
           <div className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
-            <div className="reveal">
-              <p className="label text-brand-light">04 — Dashboard</p>
-              <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Analisa teknikal interaktif</h2>
-              <p className="mt-4 max-w-2xl text-steel">Grafik real-time dan ringkasan indikator teknikal untuk XAUUSD, WTI, dan pasar utama lainnya.</p>
+            <div className="reveal text-center">
+              <p className="label text-brand-light">03 — Klien Kami</p>
+              <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Dipercaya oleh Perusahaan</h2>
             </div>
-            <div className="reveal d1 mt-10">
-              <Dashboard />
+            <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                ["Manajemen event yang luar biasa! Polestar mengurus segalanya dari A sampai Z sehingga kami bisa fokus pada tamu dan presentasi bisnis kami.", "Budi S.", "PT SAS", "CEO"],
+                ["Detail oriented dan sangat profesional. Event gathering tahunan kami berjalan lancar tanpa kendala teknis sedikitpun berkat tim Polestar.", "Anita W.", "Corporate", "HR Director"],
+                ["Dekorasi, lighting, dan alur acara sangat rapi. Sangat merekomendasikan Polestar untuk kebutuhan corporate event berskala besar.", "Hendra C.", "Tech Co", "Marketing Head"],
+              ].map(([quote, name, company, role], i) => (
+                <figure key={i} className="reveal rounded-xl glass gradient-border p-8 card-float flex flex-col">
+                  <blockquote className="text-ink leading-relaxed flex-1">&ldquo;{quote}&rdquo;</blockquote>
+                  <figcaption className="mt-8 flex items-center gap-4 border-t border-line pt-6">
+                    <div className="h-12 w-12 rounded-full bg-gradient-to-br from-brand/20 to-brand-dark/20 flex items-center justify-center font-display font-bold text-brand-light">
+                      {name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-ink">{name}</p>
+                      <p className="text-xs text-faint">{role}, {company}</p>
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
             </div>
-            <p className="reveal mt-6 text-xs text-faint max-w-3xl">Data &amp; grafik bersifat informatif/edukasi dan dapat tertunda. Bukan saran finansial atau ajakan jual/beli.</p>
           </div>
         </section>
 
-        {/* ── 05 LIVE ── */}
-        <section id="live" className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
-          <div className="reveal">
-            <p className="label text-brand-light">05 — Live Streaming</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Belajar langsung bersama mentor</h2>
-            <p className="mt-4 max-w-2xl text-steel">Ikuti sesi live trading &amp; edukasi di YouTube. Bedah pasar, eksekusi, dan tanya-jawab real-time.</p>
-          </div>
+        {/* ── CTA ── */}
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#061520] via-[#0a2435] to-[#0B1929]" />
+          <div className="absolute inset-0 grid-bg opacity-50" />
 
-          <div className="mt-12 grid lg:grid-cols-3 gap-6">
-            <LiveSection />
-            <div className="reveal d2 rounded-xl glass gradient-border p-6 flex flex-col">
-              <h3 className="font-display text-lg font-semibold tracking-tight text-ink">Jadwal Sesi Live</h3>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                <li className="flex items-center justify-between gap-3 border-b border-line pb-2.5">
-                  <div><p className="font-semibold text-ink">Global Market Outlook</p><p className="text-faint">Pagi</p></div>
-                  <span className="font-mono text-brand-light">09.00</span>
-                </li>
-                <li className="flex items-center justify-between gap-3 border-b border-line pb-2.5">
-                  <div><p className="font-semibold text-ink">Global Market News</p><p className="text-faint">Siang</p></div>
-                  <span className="font-mono text-brand-light">12.00</span>
-                </li>
-                <li className="flex items-center justify-between gap-3">
-                  <div><p className="font-semibold text-ink">Global Market Recap</p><p className="text-faint">Sore</p></div>
-                  <span className="font-mono text-brand-light">17.00</span>
-                </li>
-              </ul>
-              <a href={site.youtube} target="_blank" rel="noopener" className="mt-auto pt-6 inline-flex items-center justify-center gap-2 rounded-lg border border-line px-4 py-3 font-semibold text-ink hover:bg-white/5 hover:border-brand/30 transition-all duration-300 cursor-pointer">
-                <svg viewBox="0 0 24 24" className="h-5 w-5 text-down" fill="currentColor" aria-hidden="true"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z" /></svg>
-                Subscribe di YouTube
+          <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-24 sm:py-32 text-center">
+            <h2 className="reveal d1 font-display text-[clamp(2rem,4.5vw,3.5rem)] font-bold tracking-[-0.03em] leading-[1.02] text-white">Siap Menggelar Event Sukses?</h2>
+            <p className="reveal d2 mt-6 max-w-2xl mx-auto text-white/60 text-lg">Konsultasikan kebutuhan acara B2B Anda bersama tim profesional kami hari ini.</p>
+            <div className="reveal d3 mt-10">
+              <a href={waContactLink("Konsultasi Event B2B")} target="_blank" rel="noopener" className="inline-flex items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-8 py-4 font-bold text-white hover:shadow-[0_0_40px_rgba(74,171,184,0.4)] transition-all duration-300 cursor-pointer scale-105">
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="currentColor" aria-hidden="true">
+                  <path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3s1 2.7 1.2 2.9c.1.2 2 3.1 5 4.3.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z" />
+                </svg>
+                Hubungi Kami via WhatsApp
               </a>
             </div>
           </div>
         </section>
 
-        {/* ── 06 EDUKASI ── */}
-        <section id="edukasi" className="border-y border-line">
-          <div className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
-            <div className="reveal">
-              <p className="label text-brand-light">06 — Kurikulum</p>
-              <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Apa yang Anda pelajari</h2>
-            </div>
-            <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {[
-                ["01", "Price Action", "Membaca struktur pasar, support/resistance, dan pola candlestick tanpa indikator berlebihan."],
-                ["02", "Manajemen Risiko", "Position sizing, stop-loss, dan risk-reward agar modal Anda terlindungi jangka panjang."],
-                ["03", "Psikologi Trading", "Mengelola emosi, disiplin pada rencana, dan membangun mindset yang konsisten."],
-                ["04", "Setup Bot / EA", "Cara memasang, mengatur, dan mengoptimalkan Expert Advisor di MetaTrader."],
-                ["05", "Membaca AI Signal", "Memanfaatkan sinyal AI: entry, stop, dan target dengan manajemen risiko."],
-                ["06", "Komunitas & Mentoring", "Diskusi harian, review trade bersama, dan dukungan dari mentor."],
-              ].map(([n, t, d], i) => (
-                <div key={n} className={`reveal d${(i % 3) + 1} glass gradient-border rounded-xl p-7 card-float group`}>
-                  <span className="font-mono text-sm text-brand/50">{n}</span>
-                  <h3 className="mt-4 font-display text-lg font-semibold tracking-tight text-ink group-hover:text-brand-light transition-colors">{t}</h3>
-                  <p className="mt-2 text-sm text-steel leading-relaxed">{d}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ── 07 TESTIMONI ── */}
-        <section className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
-          <div className="reveal">
-            <p className="label text-brand-light">07 — Komunitas</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] max-w-3xl text-ink">Dipercaya ribuan trader Indonesia</h2>
-          </div>
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
-            {[
-              ["Analisa XAUUSD-nya rinci dan mudah diikuti. Sebagai pemula, saya akhirnya paham cara baca struktur pasar.", "Rizky A.", "RA", "Anggota sejak 2024"],
-              ["Gold Mind AI sangat membantu. Sinyalnya jelas dan order ke MT5 lewat Telegram benar-benar praktis.", "Dewi W.", "DW", "Anggota sejak 2023"],
-              ["Sesi live-nya daging semua. Bisa lihat langsung mentor menganalisa WTI dari awal sampai eksekusi.", "Bagus P.", "BP", "Anggota sejak 2025"],
-            ].map(([quote, name, initials, since]) => (
-              <figure key={name} className="reveal rounded-xl glass gradient-border p-7 card-float">
-                <div className="flex gap-0.5 text-brand-light" aria-label="5 dari 5 bintang">
-                  {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4" />)}
-                </div>
-                <blockquote className="mt-4 text-ink leading-relaxed">&ldquo;{quote}&rdquo;</blockquote>
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                  <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-brand/20 to-brand-dark/20 font-display font-semibold text-brand-light">{initials}</span>
-                  <div><p className="text-sm font-semibold text-ink">{name}</p><p className="text-xs text-faint">{since}</p></div>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-        </section>
-
-        {/* ── 08 TELEGRAM FUNNEL ── */}
-        <section id="gabung" className="relative overflow-hidden">
-          {/* Gradient bg */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#061520] via-[#0a2435] to-[#0B1929]" />
-          <div className="absolute inset-0 grid-bg opacity-50" />
-
-          <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              <div>
-                <p className="reveal label text-brand-light">08 — Komunitas Telegram</p>
-                <h2 className="reveal d1 mt-4 font-display text-[clamp(2rem,4.5vw,3.5rem)] font-bold tracking-[-0.03em] leading-[1.02] text-white">Bergabung dalam 3 langkah mudah</h2>
-                <p className="reveal d2 mt-5 max-w-md text-white/60 text-lg">Gratis, tanpa biaya tersembunyi. Mulai terima analisa &amp; belajar bareng komunitas hari ini juga.</p>
-                <ol className="reveal d3 mt-10 space-y-6">
-                  {[
-                    ["1", "Klik tombol \u2018Gabung Telegram\u2019", "Anda diarahkan langsung ke grup resmi Polestar Indonesia."],
-                    ["2", "Baca panduan & aturan grup", "Pesan tersemat berisi cara memaksimalkan analisa & jadwal sesi."],
-                    ["3", "Mulai terima analisa harian", "Ikut diskusi, sesi live, dan dapatkan update pasar setiap hari."],
-                  ].map(([n, t, d]) => (
-                    <li key={n} className="flex gap-5">
-                      <span className="flex-none font-display text-2xl font-bold text-brand-light w-8">{n}</span>
-                      <div className="border-t border-white/10 pt-1">
-                        <p className="font-semibold text-white">{t}</p>
-                        <p className="text-sm text-white/50 mt-0.5">{d}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              <div className="reveal d2">
-                <div className="rounded-2xl glass gradient-border p-7 sm:p-9">
-                  <div className="flex items-center gap-3">
-                    <Logo className="h-12 w-12" />
-                    <div>
-                      <p className="font-display font-semibold text-ink">Polestar Indonesia</p>
-                      <p className="text-sm text-faint"><span data-count="12500" data-suffix="+">0</span> anggota · Gratis</p>
-                    </div>
-                  </div>
-                  <ul className="mt-7 space-y-3 text-sm">
-                    {["Analisa harian XAUUSD & WTI", "Update produk EA & AI Signal", "Tanya-jawab langsung dengan mentor", "Materi edukasi eksklusif"].map((b) => (
-                      <li key={b} className="flex items-center gap-3 text-ink"><Check className="h-5 w-5 flex-none text-brand-light" /> {b}</li>
-                    ))}
-                  </ul>
-                  <a href={site.telegram} target="_blank" rel="noopener" className="mt-8 flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-6 py-4 font-bold text-white hover:shadow-[0_0_30px_rgba(74,171,184,0.35)] transition-all duration-300 cursor-pointer">
-                    <TelegramGlyph className="h-5 w-5" />
-                    Gabung Telegram Gratis
-                  </a>
-                  <p className="mt-3 text-center text-xs text-faint">Tanpa biaya · Tanpa kartu kredit · Keluar kapan saja</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ── 09 FAQ ── */}
+        {/* ── FAQ ── */}
         <section id="faq" className="mx-auto max-w-3xl px-5 sm:px-8 lg:px-12 py-20 sm:py-28">
           <div className="reveal text-center">
-            <p className="label text-brand-light">09 — FAQ</p>
-            <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Pertanyaan umum</h2>
+            <p className="label text-brand-light">04 — FAQ</p>
+            <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-bold tracking-[-0.03em] leading-[1.02] text-ink">Pertanyaan Umum</h2>
           </div>
           <div className="reveal d1 mt-12 border-t border-line">
             {[
-              ["Apakah bot bisa untuk pemula?", "Bisa. Kami sediakan panduan setup, kelas edukasi, dan dukungan komunitas untuk membantu Anda memasang serta menggunakan EA/AI Signal."],
-              ["Bagaimana cara membeli produk?", "Pilih produk pada bagian Produk, lalu klik tombol \u2018Order\u2019 \u2014 Anda akan diarahkan ke website resmi PT SAS (Smartin Advisor Sistem) untuk melakukan pembelian. Setelah itu, konfirmasikan ke Polestar Indonesia dan produk akan segera kami kirim. WhatsApp hanya untuk bertanya-jawab dengan admin."],
-              ["Apakah ini menjamin profit?", "Tidak. Semua produk & konten bersifat alat bantu dan edukasi, bukan jaminan profit maupun saran finansial. Trading mengandung risiko."],
-              ["Platform apa yang didukung?", "MetaTrader 4 & 5 untuk Expert Advisor. AI Signal dikirim via Telegram dan dapat dieksekusi ke MT5."],
-              ["Apakah ada komunitas gratis?", "Ya. Grup Telegram Polestar Indonesia gratis untuk analisa harian, update, dan tanya-jawab."],
+              ["Event apa saja yang bisa ditangani oleh Polestar?", "Kami berfokus pada event B2B seperti konferensi, seminar, pameran (exhibition), company gathering, dan brand activation perusahaan (seperti event SAS)."],
+              ["Apakah Polestar menangani event di luar kota?", "Ya, kami melayani pelaksanaan acara di berbagai kota di Indonesia. Tim kami siap melakukan survei dan eksekusi di lokasi yang Anda inginkan."],
+              ["Bagaimana cara memulai kerjasama?", "Anda dapat menekan tombol WhatsApp untuk berkonsultasi gratis. Ceritakan visi dan kebutuhan acara Anda, lalu tim kami akan memberikan proposal dan estimasi biaya."],
             ].map(([q, a]) => (
               <details key={q} className="group border-b border-line">
                 <summary className="flex cursor-pointer items-center justify-between gap-4 py-5 font-semibold text-lg text-ink">
@@ -440,51 +247,40 @@ export default async function Home() {
       {/* ── FOOTER ── */}
       <footer className="border-t border-line">
         <div className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 pt-16 pb-28 sm:pb-16">
-          <div className="grid md:grid-cols-4 gap-10">
-            <div className="md:col-span-2">
+          <div className="grid md:grid-cols-3 gap-10">
+            <div>
               <a href="#hero" className="flex items-center gap-2.5" aria-label="Polestar Indonesia">
                 <Logo className="h-8 w-8" />
                 <span className="font-display text-lg font-semibold tracking-tight text-ink">Polestar <span className="gradient-text">Indonesia</span></span>
               </a>
-              <p className="mt-4 max-w-md text-sm text-steel leading-relaxed">Edukasi trading, Expert Advisor, dan AI Signal untuk pasar emas, minyak, dan forex. Belajar dengan disiplin dan manajemen risiko yang sehat.</p>
+              <p className="mt-4 max-w-sm text-sm text-steel leading-relaxed">Event Organizer profesional yang berdedikasi menciptakan pengalaman B2B, pameran, dan seminar berkualitas tinggi.</p>
             </div>
             <nav aria-label="Navigasi footer">
               <h3 className="text-sm font-semibold text-ink">Jelajahi</h3>
               <ul className="mt-4 space-y-2.5 text-sm text-steel">
-                <li><a href="#produk" className="hover:text-brand-light transition-colors">Produk &amp; Harga</a></li>
-                <li><a href="#analisa" className="hover:text-brand-light transition-colors">Analisa Teknikal</a></li>
-                <li><a href="#live" className="hover:text-brand-light transition-colors">Live &amp; Edukasi</a></li>
+                <li><a href="#layanan" className="hover:text-brand-light transition-colors">Layanan Kami</a></li>
+                <li><a href="#portofolio" className="hover:text-brand-light transition-colors">Portofolio</a></li>
                 <li><a href="#faq" className="hover:text-brand-light transition-colors">FAQ</a></li>
               </ul>
             </nav>
             <div>
-              <h3 className="text-sm font-semibold text-ink">Mulai sekarang</h3>
-              <p className="mt-4 text-sm text-steel">Gabung komunitas &amp; terima analisa harian gratis.</p>
-              <a href={site.telegram} target="_blank" rel="noopener" className="mt-4 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-2.5 text-sm font-semibold text-white hover:shadow-[0_0_20px_rgba(74,171,184,0.3)] transition-all duration-300 cursor-pointer">Gabung Telegram</a>
+              <h3 className="text-sm font-semibold text-ink">Kontak</h3>
+              <p className="mt-4 text-sm text-steel">Siap untuk merencanakan event berikutnya bersama kami?</p>
+              <a href={waContactLink()} target="_blank" rel="noopener" className="mt-4 inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-2.5 text-sm font-semibold text-white hover:shadow-[0_0_20px_rgba(74,171,184,0.3)] transition-all duration-300 cursor-pointer">Hubungi Kami</a>
             </div>
           </div>
 
-          <div className="mt-12 rounded-xl glass p-5 text-xs leading-relaxed text-faint">
-            <p className="font-semibold text-steel">Peringatan Risiko</p>
-            <p className="mt-2">Trading instrumen keuangan mengandung risiko tinggi dan dapat mengakibatkan kerugian melebihi modal Anda. Kinerja masa lalu tidak menjamin hasil di masa depan. Seluruh produk &amp; konten Polestar Indonesia bersifat alat bantu dan edukasi, <span className="text-ink">bukan saran finansial, rekomendasi investasi, atau jaminan profit</span>. Lakukan riset mandiri sebelum mengambil keputusan. Data pasar oleh TradingView dan dapat tertunda.</p>
-          </div>
-
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-line pt-6 text-sm text-faint">
-            <p>© {new Date().getFullYear()} Polestar Indonesia. Seluruh konten bersifat edukasi.</p>
-            <p>Dibuat dengan fokus pada edukasi yang jujur &amp; transparan.</p>
+            <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-line pt-6 text-sm text-faint">
+            <p>© {new Date().getFullYear()} Polestar Indonesia. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
       {/* Sticky mobile CTA */}
-      <div className="sm:hidden fixed bottom-3 inset-x-3 z-50 grid grid-cols-2 gap-2">
-        <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener" className="flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-3.5 font-bold text-white shadow-[0_4px_20px_rgba(74,171,184,0.3)] cursor-pointer">
+      <div className="sm:hidden fixed bottom-3 inset-x-3 z-50">
+        <a href={waContactLink()} target="_blank" rel="noopener" className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-4 py-4 font-bold text-white shadow-[0_4px_20px_rgba(74,171,184,0.3)] cursor-pointer">
           <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.8-2-.9-.3-.1-.5-.2-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.5-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.1c-.2-.5-.4-.5-.6-.5h-.6c-.2 0-.5.1-.7.3-.3.3-1 .9-1 2.3s1 2.7 1.2 2.9c.1.2 2 3.1 5 4.3.7.3 1.2.5 1.7.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z" /></svg>
-          WhatsApp
-        </a>
-        <a href={site.telegram} target="_blank" rel="noopener" className="flex items-center justify-center gap-2 rounded-lg bg-[#0B1929] border border-brand/20 px-4 py-3.5 font-bold text-white shadow-lg cursor-pointer">
-          <TelegramGlyph className="h-5 w-5" />
-          Telegram
+          Konsultasi via WhatsApp
         </a>
       </div>
 
