@@ -29,10 +29,10 @@ export default function Nav() {
         }`}
       >
         <div className="flex items-center justify-between h-14 sm:h-16">
-          <a href="#hero" className="flex items-center gap-2.5" aria-label="Polestar Indonesia — beranda">
+          <a href="#hero" className="flex items-center gap-2.5" aria-label="Polestar Inovasi Nusantara — beranda">
             <Logo className="h-8 w-8 shrink-0" />
             <span className="font-display text-[1.05rem] font-semibold tracking-tight text-ink">
-              Polestar <span className="gradient-text">Indonesia</span>
+              Polestar <span className="gradient-text">Inovasi Nusantara</span>
             </span>
           </a>
 

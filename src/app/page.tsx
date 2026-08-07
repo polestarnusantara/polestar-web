@@ -70,7 +70,7 @@ export default function Home() {
                 Menciptakan <span className="gradient-text">Pengalaman Event</span> Profesional yang Tak Terlupakan.
               </h1>
               <p className="reveal d2 mt-7 text-lg sm:text-xl leading-relaxed text-steel max-w-2xl mx-auto">
-                Polestar Indonesia adalah Event Organizer terpercaya untuk kebutuhan B2B, pameran, seminar, dan brand activation perusahaan Anda.
+                Polestar Inovasi Nusantara adalah Event Organizer terpercaya untuk kebutuhan B2B, pameran, seminar, dan brand activation perusahaan Anda.
               </p>
               
               <div className="reveal d3 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -255,9 +255,9 @@ export default function Home() {
         <div className="mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12 pt-16 pb-28 sm:pb-16">
           <div className="grid md:grid-cols-3 gap-10">
             <div>
-              <a href="#hero" className="flex items-center gap-2.5" aria-label="Polestar Indonesia">
+              <a href="#hero" className="flex items-center gap-2.5" aria-label="Polestar Inovasi Nusantara">
                 <Logo className="h-8 w-8" />
-                <span className="font-display text-lg font-semibold tracking-tight text-ink">Polestar <span className="gradient-text">Indonesia</span></span>
+                <span className="font-display text-lg font-semibold tracking-tight text-ink">Polestar <span className="gradient-text">Inovasi Nusantara</span></span>
               </a>
               <p className="mt-4 max-w-sm text-sm text-steel leading-relaxed">Event Organizer profesional yang berdedikasi menciptakan pengalaman B2B, pameran, dan seminar berkualitas tinggi.</p>
             </div>
@@ -277,7 +277,7 @@ export default function Home() {
           </div>
 
             <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-line pt-6 text-sm text-faint">
-            <p>© {new Date().getFullYear()} Polestar Indonesia. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Polestar Inovasi Nusantara. All rights reserved.</p>
           </div>
         </div>
       </footer>

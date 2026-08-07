@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Polestar Indonesia — Edukasi, Bot Trading & Analisa Pasar",
+  title: "Polestar Inovasi Nusantara — Edukasi, Bot Trading & Analisa Pasar",
   description:
-    "Komunitas edukasi trading Polestar Indonesia. Expert Advisor (STARBOT, TradingMatic, Quadran EA), AI Signal (Gold Mind AI, Finsfree), analisa teknikal harian XAUUSD & WTI, dan sesi live — gratis di Telegram.",
+    "Komunitas edukasi trading Polestar Inovasi Nusantara. Expert Advisor (STARBOT, TradingMatic, Quadran EA), AI Signal (Gold Mind AI, Finsfree), analisa teknikal harian XAUUSD & WTI, dan sesi live — gratis di Telegram.",
 };
 
 export const viewport: Viewport = {

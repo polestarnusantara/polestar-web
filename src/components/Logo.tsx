@@ -3,7 +3,7 @@ export function LogoDefs() {
 }
 
 /**
- * Polestar Indonesia logo.
+ * Polestar Inovasi Nusantara logo.
  * Menggunakan tag <img> langsung agar ukuran tetap tajam dan konsisten.
  * File PNG 819×1024px cukup besar untuk ditampilkan di hero tanpa pecah.
  */
@@ -12,7 +12,7 @@ export default function Logo({ className = "h-7 w-7" }: { className?: string }) 
     /* eslint-disable-next-line @next/next/no-img-element */
     <img
       src="/polestar-logo.png"
-      alt="Polestar Indonesia"
+      alt="Polestar Inovasi Nusantara"
       className={`${className} object-contain`}
       draggable={false}
     />
