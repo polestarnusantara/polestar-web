@@ -3,6 +3,7 @@ import ScrollFx from "@/components/ScrollFx";
 import Logo, { LogoDefs } from "@/components/Logo";
 import { site, waContactLink } from "@/lib/site";
 import Image from "next/image";
+import PortfolioGrid from "@/components/PortfolioGrid";
 
 const MARQUEE = [
   "B2B Event Organizer",
@@ -168,87 +169,10 @@ export default function Home() {
             </a>
           </div>
 
-          {/* Event SAS Jogja - Bento Grid */}
-          <div className="reveal mb-6">
-            <h3 className="font-display text-lg font-semibold text-ink mb-1">Event SAS Jogja</h3>
-            <p className="text-sm text-faint">Corporate Event</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12">
-            {/* Row 1: Large + 2 small stacked */}
-            <div className="reveal d1 group relative col-span-2 row-span-2 aspect-square md:aspect-auto rounded-2xl overflow-hidden glass gradient-border card-float">
-              <Image src="/portfolio/1.jpg" alt="Event SAS Jogja 1" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
-                <p className="text-white font-display font-semibold text-lg">Event SAS Jogja</p>
-                <p className="text-white/70 text-sm">Corporate Event</p>
-              </div>
-            </div>
-            <div className="reveal d2 group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float">
-              <Image src="/portfolio/2.jpg" alt="Event SAS Jogja 2" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="25vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="text-white font-display font-semibold">Event SAS Jogja</p>
-              </div>
-            </div>
-            <div className="reveal d3 group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float">
-              <Image src="/portfolio/3.jpg" alt="Event SAS Jogja 3" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="25vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="text-white font-display font-semibold">Event SAS Jogja</p>
-              </div>
-            </div>
-            <div className="reveal d1 group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float">
-              <Image src="/portfolio/4.jpg" alt="Event SAS Jogja 4" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="25vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="text-white font-display font-semibold">Event SAS Jogja</p>
-              </div>
-            </div>
-            <div className="reveal d2 group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float">
-              <Image src="/portfolio/5.jpg" alt="Event SAS Jogja 5" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="25vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="text-white font-display font-semibold">Event SAS Jogja</p>
-              </div>
-            </div>
-            {/* Row 3: 2 small + Large */}
-            <div className="reveal d3 group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float">
-              <Image src="/portfolio/6.jpg" alt="Event SAS Jogja 6" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="25vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="text-white font-display font-semibold">Event SAS Jogja</p>
-              </div>
-            </div>
-            <div className="reveal d1 group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float">
-              <Image src="/portfolio/7.jpg" alt="Event SAS Jogja 7" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="25vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="text-white font-display font-semibold">Event SAS Jogja</p>
-              </div>
-            </div>
-            <div className="reveal d2 group relative col-span-2 aspect-[8/3] rounded-2xl overflow-hidden glass gradient-border card-float">
-              <Image src="/portfolio/8.jpg" alt="Event SAS Jogja 8" fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="50vw" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
-                <p className="text-white font-display font-semibold text-lg">Event SAS Jogja</p>
-                <p className="text-white/70 text-sm">Corporate Event</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Behind The Scenes */}
-          <div className="reveal mb-6">
-            <h3 className="font-display text-lg font-semibold text-ink mb-1">Behind The Scenes</h3>
-            <p className="text-sm text-faint">Production</p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-            {PORTFOLIO_IMAGES.filter(img => img.category === "Production").map((img, i) => (
-              <div key={i} className={`reveal d${(i % 3) + 1} group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float`}>
-                <Image 
-                  src={`/portfolio/${img.src}`} 
-                  alt={`${img.label} ${i+1}`}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 50vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <p className="text-white font-display font-semibold">{img.label}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <PortfolioGrid
+            sasImages={PORTFOLIO_IMAGES.filter(img => img.category === "Corporate Event")}
+            btsImages={PORTFOLIO_IMAGES.filter(img => img.category === "Production")}
+          />
         </section>
 
         {/* ── KLIEN / TESTIMONI ── */}
