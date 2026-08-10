@@ -2,9 +2,22 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Polestar Inovasi Nusantara — Edukasi, Bot Trading & Analisa Pasar",
+  metadataBase: new URL("https://polestarnusantara.com"),
+  title: {
+    default: "Polestar Inovasi Nusantara — B2B Event Organizer Profesional",
+    template: "%s | Polestar Inovasi Nusantara"
+  },
   description:
-    "Komunitas edukasi trading Polestar Inovasi Nusantara. Expert Advisor (STARBOT, TradingMatic, Quadran EA), AI Signal (Gold Mind AI, Finsfree), analisa teknikal harian XAUUSD & WTI, dan sesi live — gratis di Telegram.",
+    "Polestar Inovasi Nusantara adalah agensi B2B Event Organizer profesional yang menangani Corporate Exhibitions, Brand Activations, Seminars & Workshops dengan eksekusi premium.",
+  keywords: ["Event Organizer B2B", "Corporate Exhibitions", "Brand Activations", "Event Management", "Polestar Inovasi Nusantara", "Edukasi Corporate"],
+  openGraph: {
+    title: "Polestar Inovasi Nusantara — B2B Event Organizer",
+    description: "Agensi B2B Event Organizer profesional untuk eksekusi event korporat yang premium dan terpercaya.",
+    url: "https://polestarnusantara.com",
+    siteName: "Polestar Inovasi Nusantara",
+    locale: "id_ID",
+    type: "website",
+  }
 };
 
 export const viewport: Viewport = {
