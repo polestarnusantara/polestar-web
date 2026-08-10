@@ -13,13 +13,23 @@ const MARQUEE = [
   "Professional Execution",
 ];
 
-const PORTFOLIO_IMAGES = [
-  "20260807-093604.jpg",
-  "20260807-093608.jpg",
-  "20260807-093611.jpg",
-  "20260807-093613.jpg",
-  "20260807-093615.png",
-  "20260807-093618.png"
+const PORTFOLIO_IMAGES: { src: string; label: string; category: string }[] = [
+  // Event SAS Jogja
+  { src: "1.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  { src: "2.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  { src: "3.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  { src: "4.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  { src: "5.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  { src: "6.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  { src: "7.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  { src: "8.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  // Syuting / Activity
+  { src: "20260807-093604.jpg", label: "Behind The Scenes", category: "Production" },
+  { src: "20260807-093608.jpg", label: "Behind The Scenes", category: "Production" },
+  { src: "20260807-093611.jpg", label: "Behind The Scenes", category: "Production" },
+  { src: "20260807-093613.jpg", label: "Behind The Scenes", category: "Production" },
+  { src: "20260807-093615.png", label: "Behind The Scenes", category: "Production" },
+  { src: "20260807-093618.png", label: "Behind The Scenes", category: "Production" },
 ];
 
 function Arrow({ className }: { className?: string }) {
@@ -162,15 +172,15 @@ export default function Home() {
             {PORTFOLIO_IMAGES.map((img, i) => (
               <div key={i} className={`reveal d${(i % 3) + 1} group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float`}>
                 <Image 
-                  src={`/portfolio/${img}`} 
-                  alt={`Dokumentasi Event Polestar ${i+1}`}
+                  src={`/portfolio/${img.src}`} 
+                  alt={`${img.label} - Dokumentasi Event Polestar ${i+1}`}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/90 via-[#0B1929]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                  <p className="text-white font-display font-semibold text-lg">Activity {i+1}</p>
-                  <p className="text-white/70 text-sm">Event Management</p>
+                  <p className="text-white font-display font-semibold text-lg">{img.label}</p>
+                  <p className="text-white/70 text-sm">{img.category}</p>
                 </div>
               </div>
             ))}
