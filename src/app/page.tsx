@@ -177,7 +177,8 @@ export default function Home() {
           </div>
 
           <PortfolioGrid
-            sasImages={PORTFOLIO_IMAGES.filter(img => img.category === "Corporate Event" || img.category === "Seminar")}
+            sasImages={PORTFOLIO_IMAGES.filter(img => img.category === "Corporate Event")}
+            sasJakartaImages={PORTFOLIO_IMAGES.filter(img => img.category === "Seminar")}
             btsImages={PORTFOLIO_IMAGES.filter(img => img.category === "Production")}
           />
         </section>

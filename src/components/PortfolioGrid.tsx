@@ -11,12 +11,14 @@ interface PortfolioItem {
 
 export default function PortfolioGrid({
   sasImages,
+  sasJakartaImages,
   btsImages,
 }: {
   sasImages: PortfolioItem[];
+  sasJakartaImages: PortfolioItem[];
   btsImages: PortfolioItem[];
 }) {
-  const allImages = [...sasImages, ...btsImages];
+  const allImages = [...sasImages, ...sasJakartaImages, ...btsImages];
   const [open, setOpen] = useState(false);
   const [idx, setIdx] = useState(0);
 
@@ -54,10 +56,10 @@ export default function PortfolioGrid({
 
   return (
     <>
-      {/* Corporate Events - Bento Grid */}
+      {/* Event SAS Jogja - Bento Grid */}
       <div className="reveal mb-6">
-        <h3 className="font-display text-lg font-semibold text-ink mb-1">Corporate Events & Seminars</h3>
-        <p className="text-sm text-faint">Event Highlights</p>
+        <h3 className="font-display text-lg font-semibold text-ink mb-1">Event SAS Jogja</h3>
+        <p className="text-sm text-faint">Corporate Event</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12">
         {sasImages.map((item, i) => {
@@ -90,6 +92,42 @@ export default function PortfolioGrid({
         })}
       </div>
 
+      {/* Event SAS Jakarta - Bento Grid */}
+      <div className="reveal mb-6">
+        <h3 className="font-display text-lg font-semibold text-ink mb-1">Event SAS Jakarta</h3>
+        <p className="text-sm text-faint">Workshop & Seminar</p>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12">
+        {sasJakartaImages.map((item, i) => {
+          const isFirst = i === 0;
+          const isLast = i === sasJakartaImages.length - 1;
+          let extraClass = "";
+          if (isFirst) extraClass = "col-span-2 row-span-2 aspect-square md:aspect-auto";
+          else if (isLast) extraClass = "col-span-2 aspect-[8/3]";
+          else extraClass = "aspect-[4/3]";
+
+          return (
+            <button
+              key={i}
+              onClick={() => openAt(sasImages.length + i)}
+              className={`reveal d${(i % 3) + 1} group relative ${extraClass} rounded-2xl overflow-hidden glass gradient-border card-float cursor-pointer text-left`}
+            >
+              <Image
+                src={`/portfolio/${item.src}`}
+                alt={`${item.label} ${i + 1}`}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                sizes={isFirst || isLast ? "(max-width: 768px) 100vw, 50vw" : "25vw"}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1929]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5">
+                <p className="text-white font-display font-semibold text-lg">{item.label}</p>
+                <p className="text-white/70 text-sm">{item.category}</p>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
       {/* Behind The Scenes */}
       <div className="reveal mb-6">
         <h3 className="font-display text-lg font-semibold text-ink mb-1">Behind The Scenes</h3>
@@ -99,7 +137,7 @@ export default function PortfolioGrid({
         {btsImages.map((item, i) => (
           <button
             key={i}
-            onClick={() => openAt(sasImages.length + i)}
+            onClick={() => openAt(sasImages.length + sasJakartaImages.length + i)}
             className={`reveal d${(i % 3) + 1} group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float cursor-pointer text-left`}
           >
             <Image
