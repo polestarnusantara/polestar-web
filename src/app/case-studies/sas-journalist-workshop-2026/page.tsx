@@ -115,7 +115,7 @@ export default function ArticlePage() {
             href="https://wa.me/6281313155174?text=Halo%20Polestar%20Inovasi%20Nusantara!%20Saya%20tertarik%20menggunakan%20jasa%20Event%20Organizer%20untuk%20acara%20perusahaan%20saya.%20Bisa%20berkonsultasi?"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-xl bg-white text-canvas px-8 py-4 font-mono font-medium hover:bg-white/90 transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center justify-center rounded-xl bg-white text-[#080d18] px-8 py-4 font-mono font-medium hover:bg-white/90 transition-all duration-300 hover:scale-105"
           >
             Konsultasikan Event Anda
           </Link>
