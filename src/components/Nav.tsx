@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Logo from "./Logo";
+import Link from "next/link";
 import { site, waContactLink } from "@/lib/site";
 
 const LINKS = [
-  { href: "#layanan", label: "Layanan" },
-  { href: "#portofolio", label: "Portofolio" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#layanan", label: "Layanan" },
+  { href: "/#portofolio", label: "Portofolio" },
+  { href: "/case-studies", label: "Case Studies" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export default function Nav() {
@@ -38,9 +40,9 @@ export default function Nav() {
 
           <div className="hidden lg:flex items-center gap-9 text-[0.95rem] font-medium text-steel">
             {LINKS.map((l) => (
-              <a key={l.href} href={l.href} className="hover:text-brand-light transition-colors duration-200">
+              <Link key={l.href} href={l.href} className="hover:text-brand-light transition-colors duration-200">
                 {l.label}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -73,14 +75,14 @@ export default function Nav() {
           <div className="lg:hidden pb-3">
             <div className="rounded-xl glass p-1.5 text-ink">
               {LINKS.map((l) => (
-                <a
+                <Link
                   key={l.href}
                   href={l.href}
                   onClick={() => setOpen(false)}
                   className="block rounded-lg px-4 py-3 hover:bg-white/5 transition-colors"
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
               <a
                 href={waContactLink()}
