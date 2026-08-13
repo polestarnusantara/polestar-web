@@ -24,6 +24,13 @@ const PORTFOLIO_IMAGES: { src: string; label: string; category: string }[] = [
   { src: "6.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
   { src: "7.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
   { src: "8.jpg", label: "Event SAS Jogja", category: "Corporate Event" },
+  // Event SAS Jakarta
+  { src: "sas-jkt-1.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
+  { src: "sas-jkt-2.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
+  { src: "sas-jkt-3.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
+  { src: "sas-jkt-4.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
+  { src: "sas-jkt-5.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
+  { src: "sas-jkt-6.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
   // Syuting / Activity
   { src: "20260807-093604.jpg", label: "Behind The Scenes", category: "Production" },
   { src: "20260807-093608.jpg", label: "Behind The Scenes", category: "Production" },
