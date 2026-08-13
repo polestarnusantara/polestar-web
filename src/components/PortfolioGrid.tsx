@@ -18,7 +18,7 @@ export default function PortfolioGrid({
   sasJakartaImages: PortfolioItem[];
   btsImages: PortfolioItem[];
 }) {
-  const allImages = [...sasImages, ...sasJakartaImages, ...btsImages];
+  const allImages = [...sasJakartaImages, ...sasImages, ...btsImages];
   const [open, setOpen] = useState(false);
   const [idx, setIdx] = useState(0);
 
@@ -56,15 +56,15 @@ export default function PortfolioGrid({
 
   return (
     <>
-      {/* Event SAS Jogja - Bento Grid */}
+      {/* Event SAS Jakarta - Bento Grid */}
       <div className="reveal mb-6">
-        <h3 className="font-display text-lg font-semibold text-ink mb-1">Event SAS Jogja</h3>
-        <p className="text-sm text-faint">Corporate Event</p>
+        <h3 className="font-display text-lg font-semibold text-ink mb-1">Event SAS Jakarta</h3>
+        <p className="text-sm text-faint">Workshop & Seminar</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12">
-        {sasImages.map((item, i) => {
+        {sasJakartaImages.map((item, i) => {
           const isFirst = i === 0;
-          const isLast = i === sasImages.length - 1;
+          const isLast = i === sasJakartaImages.length - 1;
           let extraClass = "";
           if (isFirst) extraClass = "col-span-2 row-span-2 aspect-square md:aspect-auto";
           else if (isLast) extraClass = "col-span-2 aspect-[8/3]";
@@ -92,15 +92,15 @@ export default function PortfolioGrid({
         })}
       </div>
 
-      {/* Event SAS Jakarta - Bento Grid */}
+      {/* Event SAS Jogja - Bento Grid */}
       <div className="reveal mb-6">
-        <h3 className="font-display text-lg font-semibold text-ink mb-1">Event SAS Jakarta</h3>
-        <p className="text-sm text-faint">Workshop & Seminar</p>
+        <h3 className="font-display text-lg font-semibold text-ink mb-1">Event SAS Jogja</h3>
+        <p className="text-sm text-faint">Corporate Event</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12">
-        {sasJakartaImages.map((item, i) => {
+        {sasImages.map((item, i) => {
           const isFirst = i === 0;
-          const isLast = i === sasJakartaImages.length - 1;
+          const isLast = i === sasImages.length - 1;
           let extraClass = "";
           if (isFirst) extraClass = "col-span-2 row-span-2 aspect-square md:aspect-auto";
           else if (isLast) extraClass = "col-span-2 aspect-[8/3]";
@@ -109,7 +109,7 @@ export default function PortfolioGrid({
           return (
             <button
               key={i}
-              onClick={() => openAt(sasImages.length + i)}
+              onClick={() => openAt(sasJakartaImages.length + i)}
               className={`reveal d${(i % 3) + 1} group relative ${extraClass} rounded-2xl overflow-hidden glass gradient-border card-float cursor-pointer text-left`}
             >
               <Image
@@ -128,6 +128,8 @@ export default function PortfolioGrid({
         })}
       </div>
 
+
+
       {/* Behind The Scenes */}
       <div className="reveal mb-6">
         <h3 className="font-display text-lg font-semibold text-ink mb-1">Behind The Scenes</h3>
@@ -137,7 +139,7 @@ export default function PortfolioGrid({
         {btsImages.map((item, i) => (
           <button
             key={i}
-            onClick={() => openAt(sasImages.length + sasJakartaImages.length + i)}
+            onClick={() => openAt(sasJakartaImages.length + sasImages.length + i)}
             className={`reveal d${(i % 3) + 1} group relative aspect-[4/3] rounded-2xl overflow-hidden glass gradient-border card-float cursor-pointer text-left`}
           >
             <Image

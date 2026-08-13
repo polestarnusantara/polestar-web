@@ -31,6 +31,8 @@ const PORTFOLIO_IMAGES: { src: string; label: string; category: string }[] = [
   { src: "sas-jkt-4.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
   { src: "sas-jkt-5.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
   { src: "sas-jkt-6.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
+  { src: "sas-jkt-7.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
+  { src: "sas-jkt-8.jpg", label: "Workshop Journalist SAS", category: "Seminar" },
   // Syuting / Activity
   { src: "20260807-093604.jpg", label: "Behind The Scenes", category: "Production" },
   { src: "20260807-093608.jpg", label: "Behind The Scenes", category: "Production" },
