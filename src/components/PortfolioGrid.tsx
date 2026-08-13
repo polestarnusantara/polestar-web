@@ -54,10 +54,10 @@ export default function PortfolioGrid({
 
   return (
     <>
-      {/* Event SAS Jogja - Bento Grid */}
+      {/* Corporate Events - Bento Grid */}
       <div className="reveal mb-6">
-        <h3 className="font-display text-lg font-semibold text-ink mb-1">Event SAS Jogja</h3>
-        <p className="text-sm text-faint">Corporate Event</p>
+        <h3 className="font-display text-lg font-semibold text-ink mb-1">Corporate Events & Seminars</h3>
+        <p className="text-sm text-faint">Event Highlights</p>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-12">
         {sasImages.map((item, i) => {
