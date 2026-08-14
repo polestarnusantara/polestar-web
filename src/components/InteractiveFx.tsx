@@ -2,31 +2,33 @@
 
 import { useEffect, useRef } from "react";
 
-interface Star3D {
-  baseX: number;
-  baseY: number;
+interface AntigravityDot {
+  arm: number;
+  dotIndex: number;
+  t: number;            // 0 to 1 distance along the spiral arm
+  baseR: number;
+  baseAngle: number;
   baseZ: number;
-  radius: number;
-  angle: number;
-  orbitSpeed: number;
-  size: number;
+  width: number;
+  length: number;
   color: string;
   glowColor: string;
-  alpha: number;
-  twinkleSpeed: number;
-  twinklePhase: number;
+  baseAlpha: number;
   dispX: number;
   dispY: number;
   vx: number;
   vy: number;
 }
 
-const COLORS = [
-  { fill: "#7ED4E0", glow: "rgba(126, 212, 224, 0.9)" }, // Bright Cyan
-  { fill: "#4AABB8", glow: "rgba(74, 171, 184, 0.85)" }, // Brand Teal
-  { fill: "#B8E6F0", glow: "rgba(184, 230, 240, 0.95)" },// Ice White-Blue
-  { fill: "#FFFFFF", glow: "rgba(255, 255, 255, 0.95)" },// Pure Starlight White
-  { fill: "#38BDF8", glow: "rgba(56, 189, 248, 0.8)" },  // Electric Sky Blue
+// Spectrum palette matching Antigravity & Polestar Theme
+const COLOR_STOPS = [
+  { fill: "#7ED4E0", glow: "rgba(126, 212, 224, 0.6)" }, // Polestar Neon Cyan
+  { fill: "#38BDF8", glow: "rgba(56, 189, 248, 0.6)" },  // Sky Blue
+  { fill: "#4AABB8", glow: "rgba(74, 171, 184, 0.6)" },  // Polestar Brand Teal
+  { fill: "#E8EDF5", glow: "rgba(232, 237, 245, 0.7)" }, // Starlight White
+  { fill: "#5EEAD4", glow: "rgba(94, 234, 212, 0.6)" },  // Aquamarine
+  { fill: "#818CF8", glow: "rgba(129, 140, 248, 0.5)" }, // Electric Periwinkle
+  { fill: "#2A7A8A", glow: "rgba(42, 122, 138, 0.4)" },  // Deep Ocean Teal
 ];
 
 export default function InteractiveFx() {
@@ -64,40 +66,55 @@ export default function InteractiveFx() {
     resize();
     window.addEventListener("resize", resize, { passive: true });
 
-    // ── Generate 260 3D Antigravity Particles (Concentric multi-orbit vortex) ──
-    const PARTICLE_COUNT = 260;
-    const particles: Star3D[] = [];
+    // ── Generate Google Antigravity Multi-Arm Logarithmic Spiral Constellation ──
+    const NUM_ARMS = 28;         // 28 curved radial arms
+    const DOTS_PER_ARM = 18;     // 18 particles per arm = 504 particles total
+    const particles: AntigravityDot[] = [];
 
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      const ringIndex = i % 8;
-      const minR = 100 + ringIndex * 50;
-      const maxR = minR + 45;
-      const radius = minR + Math.random() * (maxR - minR);
-      const angle = Math.random() * Math.PI * 2;
-      const baseZ = (Math.random() - 0.5) * 380;
-      const colorObj = COLORS[Math.floor(Math.random() * COLORS.length)];
+    for (let arm = 0; arm < NUM_ARMS; arm++) {
+      const armAngleOffset = (arm / NUM_ARMS) * Math.PI * 2;
+      const colorObj = COLOR_STOPS[arm % COLOR_STOPS.length];
 
-      particles.push({
-        baseX: Math.cos(angle) * radius,
-        baseY: Math.sin(angle) * radius * 0.65,
-        baseZ,
-        radius,
-        angle,
-        orbitSpeed: (0.0025 + Math.random() * 0.0035) * (i % 2 === 0 ? 1 : -0.75),
-        size: 1.8 + Math.random() * 3,
-        color: colorObj.fill,
-        glowColor: colorObj.glow,
-        alpha: 0.45 + Math.random() * 0.5,
-        twinkleSpeed: 0.025 + Math.random() * 0.045,
-        twinklePhase: Math.random() * Math.PI * 2,
-        dispX: 0,
-        dispY: 0,
-        vx: 0,
-        vy: 0,
-      });
+      for (let d = 0; d < DOTS_PER_ARM; d++) {
+        const t = (d + 1) / (DOTS_PER_ARM + 1); // 0.05 to 0.95
+        
+        // Inner radius keeps a clean, elegant void around headline & logo
+        const innerRadius = 220;
+        const outerRadius = Math.max(width * 0.46, 560);
+        const baseR = innerRadius + Math.pow(t, 1.15) * (outerRadius - innerRadius);
+
+        // Curvature of the logarithmic spiral arm
+        const curveOffset = Math.pow(t, 0.85) * 1.55;
+        const baseAngle = armAngleOffset + curveOffset;
+
+        // 3D dome curvature
+        const baseZ = Math.sin(t * Math.PI) * 140 * (arm % 2 === 0 ? 1 : -0.6);
+
+        // Refined tick/dash sizing
+        const sizeWidth = 1.2 + t * 1.2; // 1.2px to 2.4px thickness
+        const length = 3.5 + t * 4.5;    // 3.5px to 8px length
+
+        particles.push({
+          arm,
+          dotIndex: d,
+          t,
+          baseR,
+          baseAngle,
+          baseZ,
+          width: sizeWidth,
+          length,
+          color: colorObj.fill,
+          glowColor: colorObj.glow,
+          baseAlpha: 0.35 + t * 0.45,
+          dispX: 0,
+          dispY: 0,
+          vx: 0,
+          vy: 0,
+        });
+      }
     }
 
-    // ── Mouse & Physics Variables ──
+    // ── Mouse & Damping Variables ──
     let mouseX = width / 2;
     let mouseY = height / 2;
     let heroMouseX = 0;
@@ -135,7 +152,7 @@ export default function InteractiveFx() {
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
 
-    // Interactive card spotlight
+    // Interactive card spotlight (Linear / Vercel style)
     const handleCardMove = (e: MouseEvent) => {
       const target = (e.target as HTMLElement)?.closest(".glass, .card-float, .spotlight-card") as HTMLElement | null;
       if (target) {
@@ -181,13 +198,13 @@ export default function InteractiveFx() {
     let time = 0;
 
     const render = () => {
-      time += 0.016;
+      time += 0.012;
 
       // Smooth lerp mouse tracking
-      curHeroX += (heroMouseX - curHeroX) * 0.06;
-      curHeroY += (heroMouseY - curHeroY) * 0.06;
+      curHeroX += (heroMouseX - curHeroX) * 0.05;
+      curHeroY += (heroMouseY - curHeroY) * 0.05;
 
-      // Spotlight glow follower
+      // Spotlight follower
       if (spotlightRef.current) {
         curSpotX += ((mouseInHero ? mouseX : width / 2) - curSpotX) * 0.08;
         curSpotY += ((mouseInHero ? mouseY : height / 2) - curSpotY) * 0.08;
@@ -197,23 +214,24 @@ export default function InteractiveFx() {
       // 3D Logo Tilt
       const heroLogo = document.querySelector<HTMLElement>(".hero-logo-interactive");
       if (heroLogo && isFinePointer && !reduceMotion) {
-        const tiltX = -curHeroY * 18;
-        const tiltY = curHeroX * 18;
-        const panX = curHeroX * 22;
-        const panY = curHeroY * 16;
+        const tiltX = -curHeroY * 16;
+        const tiltY = curHeroX * 16;
+        const panX = curHeroX * 18;
+        const panY = curHeroY * 14;
         heroLogo.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(${panX}px, ${panY}px, 0)`;
       }
 
       // Clear canvas
       ctx.clearRect(0, 0, width, height);
 
+      // Center around Logo and Headline
       const centerX = width / 2;
-      const centerY = height * 0.38; // Center of orbital constellation
-      const fov = 450;
+      const centerY = height * 0.38;
+      const fov = 480;
 
-      // 3D Rotation Angles based on cursor & ambient idle drift
-      const rotY = curHeroX * 0.5 + time * 0.09;
-      const rotX = -curHeroY * 0.35 + 0.15;
+      // 3D Rotation Matrix with smooth continuous slow vortex drift + cursor tilt
+      const rotY = curHeroX * 0.45 + (reduceMotion ? 0 : time * 0.06);
+      const rotX = -curHeroY * 0.35 + 0.12;
 
       const cosY = Math.cos(rotY);
       const sinY = Math.sin(rotY);
@@ -223,7 +241,8 @@ export default function InteractiveFx() {
       const projectedList: {
         screenX: number;
         screenY: number;
-        size: number;
+        width: number;
+        length: number;
         color: string;
         glowColor: string;
         alpha: number;
@@ -234,16 +253,12 @@ export default function InteractiveFx() {
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
 
-        if (!reduceMotion) {
-          p.angle += p.orbitSpeed;
-          p.twinklePhase += p.twinkleSpeed;
-        }
+        // Base coordinates on orbital spiral
+        const rawX = Math.cos(p.baseAngle) * p.baseR;
+        const rawY = Math.sin(p.baseAngle) * p.baseR * 0.72; // Elliptical perspective
+        const rawZ = p.baseZ;
 
-        const rawX = Math.cos(p.angle) * p.radius;
-        const rawY = Math.sin(p.angle) * p.radius * 0.65;
-        const rawZ = p.baseZ + Math.sin(p.angle * 2) * 50;
-
-        // 3D Rotation Matrix
+        // 3D Rotation
         const x1 = rawX * cosY - rawZ * sinY;
         const z1 = rawX * sinY + rawZ * cosY;
 
@@ -255,20 +270,21 @@ export default function InteractiveFx() {
         let screenX = centerX + x1 * scale + p.dispX;
         let screenY = centerY + y2 * scale + p.dispY;
 
-        // Interactive Anti-Gravity Mouse Repulsion / Deflection Physics
+        // Interactive Anti-Gravity Repulsion Physics
         if (mouseInHero && isFinePointer && !reduceMotion) {
           const dx = screenX - mouseX;
           const dy = screenY - mouseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const maxDist = 150;
+          const dist = Math.hypot(dx, dy);
+          const maxDist = 130;
 
           if (dist < maxDist && dist > 0) {
-            const force = (1 - dist / maxDist) * 18;
+            const force = (1 - dist / maxDist) * 14;
             p.vx += (dx / dist) * force;
             p.vy += (dy / dist) * force;
           }
         }
 
+        // Spring damping back to orbit
         p.vx *= 0.88;
         p.vy *= 0.88;
         p.dispX += p.vx;
@@ -276,18 +292,20 @@ export default function InteractiveFx() {
         p.dispX *= 0.92;
         p.dispY *= 0.92;
 
-        const twinkle = 0.75 + Math.sin(p.twinklePhase) * 0.25;
-        const finalAlpha = Math.max(0.15, Math.min(1, p.alpha * twinkle * scale));
-        const dashAngle = p.angle + Math.PI / 2 + rotY * 0.5;
+        // Directional alignment along the curved spiral arm
+        const tangentAngle = p.baseAngle + 0.35 + rotY;
+
+        const finalAlpha = Math.max(0.12, Math.min(0.9, p.baseAlpha * scale));
 
         projectedList.push({
           screenX,
           screenY,
-          size: Math.max(1.2, p.size * scale),
+          width: Math.max(1, p.width * scale),
+          length: Math.max(2.5, p.length * scale),
           color: p.color,
           glowColor: p.glowColor,
           alpha: finalAlpha,
-          angleRad: dashAngle,
+          angleRad: tangentAngle,
           z: z2,
         });
       }
@@ -295,25 +313,7 @@ export default function InteractiveFx() {
       // Sort by depth
       projectedList.sort((a, b) => a.z - b.z);
 
-      // Draw Constellation Connections
-      ctx.lineWidth = 0.8;
-      for (let i = 0; i < projectedList.length; i += 2) {
-        const p1 = projectedList[i];
-        for (let j = i + 1; j < projectedList.length; j += 3) {
-          const p2 = projectedList[j];
-          const dist = Math.hypot(p1.screenX - p2.screenX, p1.screenY - p2.screenY);
-          if (dist < 52) {
-            const lineAlpha = (1 - dist / 52) * 0.22 * Math.min(p1.alpha, p2.alpha);
-            ctx.strokeStyle = `rgba(126, 212, 224, ${lineAlpha})`;
-            ctx.beginPath();
-            ctx.moveTo(p1.screenX, p1.screenY);
-            ctx.lineTo(p2.screenX, p2.screenY);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Draw Antigravity Radial Dashes & Star Points
+      // Draw Antigravity Refined Radial Dashes
       for (let i = 0; i < projectedList.length; i++) {
         const p = projectedList[i];
 
@@ -321,23 +321,16 @@ export default function InteractiveFx() {
         ctx.translate(p.screenX, p.screenY);
         ctx.rotate(p.angleRad);
 
-        const isDash = i % 3 === 0;
-        const dashLength = isDash ? p.size * 3.4 : p.size;
-
+        // Soft outer glow
         ctx.shadowColor = p.glowColor;
-        ctx.shadowBlur = p.size * 3.5;
+        ctx.shadowBlur = p.width * 3;
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
 
-        if (isDash) {
-          ctx.beginPath();
-          ctx.roundRect(-dashLength / 2, -p.size / 2, dashLength, p.size, p.size / 2);
-          ctx.fill();
-        } else {
-          ctx.beginPath();
-          ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-          ctx.fill();
-        }
+        // Draw sleek pill/capsule dash
+        ctx.beginPath();
+        ctx.roundRect(-p.length / 2, -p.width / 2, p.length, p.width, p.width / 2);
+        ctx.fill();
 
         ctx.restore();
       }
