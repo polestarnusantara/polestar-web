@@ -70,9 +70,12 @@ export default function Home() {
           {/* Grid background */}
           <div className="absolute inset-0 grid-bg opacity-70" />
 
+          {/* Antigravity Interactive 3D Particle Constellation & Ambient Spotlight */}
+          <InteractiveFx />
+
           {/* Ambient orbs */}
-          <div className="hero-orb w-[600px] h-[600px] -top-40 left-1/2 -translate-x-1/2 bg-gradient-to-br from-brand/20 to-brand-dark/10" />
-          <div className="hero-orb w-[400px] h-[400px] bottom-0 -right-20 bg-gradient-to-tl from-brand-light/10 to-transparent" />
+          <div className="hero-orb w-[600px] h-[600px] -top-40 left-1/2 -translate-x-1/2 bg-gradient-to-br from-brand/20 to-brand-dark/10 pointer-events-none" />
+          <div className="hero-orb w-[400px] h-[400px] bottom-0 -right-20 bg-gradient-to-tl from-brand-light/10 to-transparent pointer-events-none" />
 
           <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12">
             <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
@@ -300,7 +303,6 @@ export default function Home() {
       </div>
 
       <ScrollFx />
-      <InteractiveFx />
     </>
   );
 }
