@@ -67,8 +67,8 @@ export default function InteractiveFx() {
     window.addEventListener("resize", resize, { passive: true });
 
     // ── Generate Google Antigravity Multi-Arm Logarithmic Spiral Constellation ──
-    const NUM_ARMS = 28;         // 28 curved radial arms
-    const DOTS_PER_ARM = 18;     // 18 particles per arm = 504 particles total
+    const NUM_ARMS = 32;         // 32 sleek curved arms
+    const DOTS_PER_ARM = 16;     // 16 particles per arm = 512 total particles
     const particles: AntigravityDot[] = [];
 
     for (let arm = 0; arm < NUM_ARMS; arm++) {
@@ -78,21 +78,21 @@ export default function InteractiveFx() {
       for (let d = 0; d < DOTS_PER_ARM; d++) {
         const t = (d + 1) / (DOTS_PER_ARM + 1); // 0.05 to 0.95
         
-        // Inner radius keeps a clean, elegant void around headline & logo
-        const innerRadius = 220;
-        const outerRadius = Math.max(width * 0.46, 560);
-        const baseR = innerRadius + Math.pow(t, 1.15) * (outerRadius - innerRadius);
+        // Large, clean inner halo so headline & logo remain perfectly readable and spacious
+        const innerRadius = 240;
+        const outerRadius = Math.max(width * 0.48, 580);
+        const baseR = innerRadius + Math.pow(t, 1.2) * (outerRadius - innerRadius);
 
-        // Curvature of the logarithmic spiral arm
-        const curveOffset = Math.pow(t, 0.85) * 1.55;
+        // Smooth logarithmic spiral curve
+        const curveOffset = Math.pow(t, 0.85) * 1.6;
         const baseAngle = armAngleOffset + curveOffset;
 
-        // 3D dome curvature
-        const baseZ = Math.sin(t * Math.PI) * 140 * (arm % 2 === 0 ? 1 : -0.6);
+        // Subtle 3D spherical dome depth
+        const baseZ = Math.sin(t * Math.PI) * 90 * (arm % 2 === 0 ? 1 : -0.5);
 
-        // Refined tick/dash sizing
-        const sizeWidth = 1.2 + t * 1.2; // 1.2px to 2.4px thickness
-        const length = 3.5 + t * 4.5;    // 3.5px to 8px length
+        // Refined tick/dash sizing matching Antigravity
+        const sizeWidth = 1.2 + t * 1.1; // 1.2px to 2.3px thickness
+        const length = 3.5 + t * 4;      // 3.5px to 7.5px length
 
         particles.push({
           arm,
@@ -105,7 +105,7 @@ export default function InteractiveFx() {
           length,
           color: colorObj.fill,
           glowColor: colorObj.glow,
-          baseAlpha: 0.35 + t * 0.45,
+          baseAlpha: 0.3 + t * 0.45,
           dispX: 0,
           dispY: 0,
           vx: 0,
@@ -114,7 +114,7 @@ export default function InteractiveFx() {
       }
     }
 
-    // ── Mouse & Damping Variables ──
+    // ── Mouse & Physics Tracking ──
     let mouseX = width / 2;
     let mouseY = height / 2;
     let heroMouseX = 0;
@@ -179,7 +179,7 @@ export default function InteractiveFx() {
         const rect = btn.getBoundingClientRect();
         const relX = e.clientX - (rect.left + rect.width / 2);
         const relY = e.clientY - (rect.top + rect.height / 2);
-        btn.style.transform = `translate3d(${relX * 0.25}px, ${relY * 0.25}px, 0)`;
+        btn.style.transform = `translate3d(${relX * 0.2}px, ${relY * 0.2}px, 0)`;
       };
 
       btn.addEventListener("mouseenter", onEnter);
@@ -198,40 +198,30 @@ export default function InteractiveFx() {
     let time = 0;
 
     const render = () => {
-      time += 0.012;
+      time += 0.008; // Steady, calm ambient revolution
 
-      // Smooth lerp mouse tracking
-      curHeroX += (heroMouseX - curHeroX) * 0.05;
-      curHeroY += (heroMouseY - curHeroY) * 0.05;
+      // Ultra-subtle smoothing for cursor
+      curHeroX += (heroMouseX - curHeroX) * 0.04;
+      curHeroY += (heroMouseY - curHeroY) * 0.04;
 
-      // Spotlight follower
+      // Soft ambient spotlight follower
       if (spotlightRef.current) {
         curSpotX += ((mouseInHero ? mouseX : width / 2) - curSpotX) * 0.08;
         curSpotY += ((mouseInHero ? mouseY : height / 2) - curSpotY) * 0.08;
         spotlightRef.current.style.transform = `translate3d(${curSpotX}px, ${curSpotY}px, 0)`;
       }
 
-      // 3D Logo Tilt
-      const heroLogo = document.querySelector<HTMLElement>(".hero-logo-interactive");
-      if (heroLogo && isFinePointer && !reduceMotion) {
-        const tiltX = -curHeroY * 16;
-        const tiltY = curHeroX * 16;
-        const panX = curHeroX * 18;
-        const panY = curHeroY * 14;
-        heroLogo.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(${panX}px, ${panY}px, 0)`;
-      }
-
       // Clear canvas
       ctx.clearRect(0, 0, width, height);
 
-      // Center around Logo and Headline
+      // Stable center around Logo and Headline (no violent camera shifts)
       const centerX = width / 2;
       const centerY = height * 0.38;
-      const fov = 480;
+      const fov = 600;
 
-      // 3D Rotation Matrix with smooth continuous slow vortex drift + cursor tilt
-      const rotY = curHeroX * 0.45 + (reduceMotion ? 0 : time * 0.06);
-      const rotX = -curHeroY * 0.35 + 0.12;
+      // Very subtle tilt (only 0.08 max tilt) so the field stays stable and elegant
+      const rotY = (reduceMotion ? 0 : time * 0.04) + curHeroX * 0.08;
+      const rotX = -curHeroY * 0.06 + 0.08;
 
       const cosY = Math.cos(rotY);
       const sinY = Math.sin(rotY);
@@ -255,7 +245,7 @@ export default function InteractiveFx() {
 
         // Base coordinates on orbital spiral
         const rawX = Math.cos(p.baseAngle) * p.baseR;
-        const rawY = Math.sin(p.baseAngle) * p.baseR * 0.72; // Elliptical perspective
+        const rawY = Math.sin(p.baseAngle) * p.baseR * 0.75;
         const rawZ = p.baseZ;
 
         // 3D Rotation
@@ -270,32 +260,31 @@ export default function InteractiveFx() {
         let screenX = centerX + x1 * scale + p.dispX;
         let screenY = centerY + y2 * scale + p.dispY;
 
-        // Interactive Anti-Gravity Repulsion Physics
+        // Interactive Anti-Gravity Repulsion Physics (local ripple as mouse passes)
         if (mouseInHero && isFinePointer && !reduceMotion) {
           const dx = screenX - mouseX;
           const dy = screenY - mouseY;
           const dist = Math.hypot(dx, dy);
-          const maxDist = 130;
+          const maxDist = 110;
 
           if (dist < maxDist && dist > 0) {
-            const force = (1 - dist / maxDist) * 14;
+            const force = (1 - dist / maxDist) * 12;
             p.vx += (dx / dist) * force;
             p.vy += (dy / dist) * force;
           }
         }
 
-        // Spring damping back to orbit
-        p.vx *= 0.88;
-        p.vy *= 0.88;
+        // Spring friction back to original orbit
+        p.vx *= 0.86;
+        p.vy *= 0.86;
         p.dispX += p.vx;
         p.dispY += p.vy;
-        p.dispX *= 0.92;
-        p.dispY *= 0.92;
+        p.dispX *= 0.90;
+        p.dispY *= 0.90;
 
-        // Directional alignment along the curved spiral arm
+        // Tangent orientation along the spiral arm
         const tangentAngle = p.baseAngle + 0.35 + rotY;
-
-        const finalAlpha = Math.max(0.12, Math.min(0.9, p.baseAlpha * scale));
+        const finalAlpha = Math.max(0.12, Math.min(0.85, p.baseAlpha * scale));
 
         projectedList.push({
           screenX,
@@ -313,7 +302,7 @@ export default function InteractiveFx() {
       // Sort by depth
       projectedList.sort((a, b) => a.z - b.z);
 
-      // Draw Antigravity Refined Radial Dashes
+      // Draw Antigravity Radial Dashes
       for (let i = 0; i < projectedList.length; i++) {
         const p = projectedList[i];
 
@@ -321,13 +310,11 @@ export default function InteractiveFx() {
         ctx.translate(p.screenX, p.screenY);
         ctx.rotate(p.angleRad);
 
-        // Soft outer glow
         ctx.shadowColor = p.glowColor;
-        ctx.shadowBlur = p.width * 3;
+        ctx.shadowBlur = p.width * 2.5;
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.alpha;
 
-        // Draw sleek pill/capsule dash
         ctx.beginPath();
         ctx.roundRect(-p.length / 2, -p.width / 2, p.length, p.width, p.width / 2);
         ctx.fill();

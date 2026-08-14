@@ -80,13 +80,13 @@ export default function Home() {
           <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12">
             <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
               
-              {/* Maximized 3D Animated Logo with Interactive Cursor Tilt */}
-              <div className="reveal mb-10 relative hero-logo-interactive transition-transform duration-150 ease-out">
+              {/* Maximized 3D Animated Logo */}
+              <div className="reveal mb-10 relative">
                 <div className="absolute inset-0 blur-[80px] bg-gradient-to-br from-brand/40 via-brand-light/30 to-brand-dark/40 rounded-full scale-150 animate-pulse pointer-events-none" />
                 <Logo className="relative h-32 w-32 sm:h-40 sm:w-40 hero-logo-max" />
               </div>
 
-              <div className="reveal inline-flex items-center gap-3 mb-8 px-5 py-2.5 rounded-full border border-brand/20 bg-brand/5 backdrop-blur-md hero-badge-parallax transition-transform duration-100 ease-out">
+              <div className="reveal inline-flex items-center gap-3 mb-8 px-5 py-2.5 rounded-full border border-brand/20 bg-brand/5 backdrop-blur-md">
                 <span className="font-display text-sm font-bold tracking-widest text-brand-light uppercase">✦ B2B Event Organizer ✦</span>
               </div>
 
