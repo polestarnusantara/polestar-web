@@ -20,18 +20,35 @@ interface StaticSpiralDot {
   vy: number;
 }
 
-// Spectrum palette matching Antigravity & Polestar Theme
-const COLOR_STOPS = [
-  { fill: "#7ED4E0", glow: "rgba(126, 212, 224, 0.7)" }, // Polestar Neon Cyan
-  { fill: "#38BDF8", glow: "rgba(56, 189, 248, 0.7)" },  // Sky Blue
-  { fill: "#4AABB8", glow: "rgba(74, 171, 184, 0.65)" }, // Polestar Brand Teal
-  { fill: "#E8EDF5", glow: "rgba(232, 237, 245, 0.8)" }, // Starlight White
-  { fill: "#5EEAD4", glow: "rgba(94, 234, 212, 0.7)" },  // Aquamarine
-  { fill: "#818CF8", glow: "rgba(129, 140, 248, 0.6)" }, // Electric Periwinkle / Violet
-  { fill: "#F43F5E", glow: "rgba(244, 63, 94, 0.65)" },  // Coral / Red-Pink accent
-  { fill: "#F59E0B", glow: "rgba(245, 158, 11, 0.65)" }, // Amber / Gold accent
-  { fill: "#10B981", glow: "rgba(16, 185, 129, 0.65)" }, // Emerald
-];
+// Polestar Signature Brand Gradient Interpolator
+function getPolestarBrandColor(t: number, armIndex: number) {
+  // t: 0 (inner halo) to 1 (outer galaxy rim)
+  if (t < 0.25) {
+    return {
+      fill: armIndex % 2 === 0 ? "#FFFFFF" : "#E0F7FA",
+      glow: "rgba(224, 247, 250, 0.9)",
+      alpha: 0.85,
+    };
+  } else if (t < 0.55) {
+    return {
+      fill: armIndex % 2 === 0 ? "#7ED4E0" : "#B8E6F0",
+      glow: "rgba(126, 212, 224, 0.8)",
+      alpha: 0.7,
+    };
+  } else if (t < 0.8) {
+    return {
+      fill: armIndex % 2 === 0 ? "#4AABB8" : "#369CA9",
+      glow: "rgba(74, 171, 184, 0.65)",
+      alpha: 0.55,
+    };
+  } else {
+    return {
+      fill: "#2A7A8A",
+      glow: "rgba(42, 122, 138, 0.45)",
+      alpha: 0.35,
+    };
+  }
+}
 
 export default function InteractiveFx() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -61,7 +78,6 @@ export default function InteractiveFx() {
 
       for (let arm = 0; arm < NUM_ARMS; arm++) {
         const armAngleOffset = (arm / NUM_ARMS) * Math.PI * 2;
-        const colorObj = COLOR_STOPS[arm % COLOR_STOPS.length];
 
         for (let d = 0; d < DOTS_PER_ARM; d++) {
           const t = (d + 1) / (DOTS_PER_ARM + 1); // 0.05 to 0.95
@@ -75,7 +91,7 @@ export default function InteractiveFx() {
           const curveOffset = Math.pow(t, 0.85) * 1.6;
           const angle = armAngleOffset + curveOffset;
 
-          // Static 2D coordinates with subtle widescreen perspective flattening
+          // Static 2D coordinates with widescreen perspective flattening
           const baseX = centerX + Math.cos(angle) * r;
           const baseY = centerY + Math.sin(angle) * r * 0.72;
 
@@ -85,6 +101,8 @@ export default function InteractiveFx() {
           const sizeWidth = 1.2 + t * 1.2; // 1.2px to 2.4px
           const length = 3.5 + t * 4.5;    // 3.5px to 8px
 
+          const colorData = getPolestarBrandColor(t, arm);
+
           particles.push({
             arm,
             dotIndex: d,
@@ -93,9 +111,9 @@ export default function InteractiveFx() {
             baseY,
             width: sizeWidth,
             length,
-            color: colorObj.fill,
-            glowColor: colorObj.glow,
-            baseAlpha: 0.35 + t * 0.45,
+            color: colorData.fill,
+            glowColor: colorData.glow,
+            baseAlpha: colorData.alpha,
             tangentAngle,
             dispX: 0,
             dispY: 0,
@@ -153,7 +171,7 @@ export default function InteractiveFx() {
 
     window.addEventListener("mousemove", onMouseMove, { passive: true });
 
-    // ── Render Loop (Static Form, Zero Parallax, Interactive Repulsion) ──
+    // ── Render Loop (Static Form, Zero Parallax, Polestar Brand Gradient, Interactive Repulsion) ──
     let rafId: number;
 
     const render = () => {
@@ -192,7 +210,7 @@ export default function InteractiveFx() {
         ctx.rotate(p.tangentAngle);
 
         ctx.shadowColor = p.glowColor;
-        ctx.shadowBlur = p.width * 2.8;
+        ctx.shadowBlur = p.width * 3;
         ctx.fillStyle = p.color;
         ctx.globalAlpha = p.baseAlpha;
 
