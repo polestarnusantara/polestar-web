@@ -1,5 +1,6 @@
 import Nav from "@/components/Nav";
 import ScrollFx from "@/components/ScrollFx";
+import InteractiveFx from "@/components/InteractiveFx";
 import Logo, { LogoDefs } from "@/components/Logo";
 import { site, waContactLink } from "@/lib/site";
 import Image from "next/image";
@@ -76,14 +77,14 @@ export default function Home() {
           <div className="relative mx-auto max-w-[1536px] px-5 sm:px-8 lg:px-12">
             <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
               
-              {/* Maximized 3D Animated Logo */}
-              <div className="reveal mb-10 relative">
-                <div className="absolute inset-0 blur-[80px] bg-gradient-to-br from-brand/40 via-brand-light/30 to-brand-dark/40 rounded-full scale-150 animate-pulse" />
+              {/* Maximized 3D Animated Logo with Interactive Cursor Tilt */}
+              <div className="reveal mb-10 relative hero-logo-interactive transition-transform duration-150 ease-out">
+                <div className="absolute inset-0 blur-[80px] bg-gradient-to-br from-brand/40 via-brand-light/30 to-brand-dark/40 rounded-full scale-150 animate-pulse pointer-events-none" />
                 <Logo className="relative h-32 w-32 sm:h-40 sm:w-40 hero-logo-max" />
               </div>
 
-              <div className="reveal inline-flex items-center gap-3 mb-8 px-5 py-2.5 rounded-full border border-brand/20 bg-brand/5 backdrop-blur-md">
-                <span className="font-display text-sm font-bold tracking-widest text-brand-light uppercase">B2B Event Organizer</span>
+              <div className="reveal inline-flex items-center gap-3 mb-8 px-5 py-2.5 rounded-full border border-brand/20 bg-brand/5 backdrop-blur-md hero-badge-parallax transition-transform duration-100 ease-out">
+                <span className="font-display text-sm font-bold tracking-widest text-brand-light uppercase">✦ B2B Event Organizer ✦</span>
               </div>
 
               <h1 className="reveal d1 font-display font-bold tracking-[-0.04em] leading-[1.05] text-[clamp(2.5rem,6vw,5.5rem)]">
@@ -94,11 +95,11 @@ export default function Home() {
               </p>
               
               <div className="reveal d3 mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="#portofolio" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-8 py-4 font-semibold text-white hover:shadow-[0_0_30px_rgba(74,171,184,0.35)] transition-all duration-300 cursor-pointer">
+                <a href="#portofolio" className="btn-magnetic w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-brand to-brand-dark px-8 py-4 font-semibold text-white hover:shadow-[0_0_35px_rgba(74,171,184,0.45)] transition-all duration-300 cursor-pointer">
                   Lihat Portofolio
                   <Arrow className="h-4 w-4" />
                 </a>
-                <a href={waContactLink()} target="_blank" rel="noopener" className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border border-line px-8 py-4 font-semibold text-ink hover:bg-white/5 hover:border-brand/30 transition-all duration-300 cursor-pointer">
+                <a href={waContactLink()} target="_blank" rel="noopener" className="btn-magnetic w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border border-line px-8 py-4 font-semibold text-ink hover:bg-white/5 hover:border-brand/30 transition-all duration-300 cursor-pointer">
                   Konsultasi Gratis
                 </a>
               </div>
@@ -299,6 +300,7 @@ export default function Home() {
       </div>
 
       <ScrollFx />
+      <InteractiveFx />
     </>
   );
 }

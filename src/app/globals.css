@@ -348,3 +348,48 @@ button:focus-visible,
   from { opacity: 0; transform: scale(0.92); }
   to { opacity: 1; transform: scale(1); }
 }
+
+/* ── Dynamic Mouse Glare on Glass & Cards ── */
+.glass, .spotlight-card {
+  position: relative;
+}
+.glass::after, .spotlight-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, -999px) var(--mouse-y, -999px),
+    rgba(126, 212, 224, 0.14),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.glass:hover::after, .spotlight-card:hover::after {
+  opacity: 1;
+}
+
+/* ── Magnetic Button ── */
+.btn-magnetic {
+  transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* ── Antigravity Floating Star Animation ── */
+@keyframes star-float {
+  0% {
+    transform: translateY(0px) scale(0.9);
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-16px) scale(1.1);
+    opacity: 0.9;
+  }
+}
+
